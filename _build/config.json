@@ -1,0 +1,31 @@
+{
+  "name": "LangRouter",
+  "lowCaseName": "langrouter",
+  "description": "Language Router for Babel",
+  "author": "gadamiak",
+  "version": "1.0.0",
+  "package": {
+    "elements": {
+      "plugins": [
+        {
+          "name": "LangRouter",
+          "file": "langrouter.plugin.php",
+          "events": ["OnHandleRequest"]
+        }
+      ]
+    },
+    "systemSettings": [
+      {
+        "key": "debug",
+        "type": "combo-boolean",
+        "area": "system",
+        "value": "0"
+      }
+    ]
+  },
+  "build": {
+    "readme": "docs/readme.txt",
+    "license": "docs/license.txt",
+    "changelog": "docs/changelog.txt"
+  }
+}
