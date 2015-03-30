@@ -3,7 +3,7 @@
   "lowCaseName": "langrouter",
   "description": "Language Router for Babel",
   "author": "gadamiak",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "package": {
     "elements": {
       "plugins": [
@@ -24,8 +24,11 @@
     ]
   },
   "build": {
-    "readme": "docs/readme.txt",
-    "license": "docs/license.txt",
-    "changelog": "docs/changelog.txt"
+    "setupOptions": {
+      "source": "resolvers/langrouter.options.php"
+    },
+    "resolver": {
+      "after": ["langrouter.set_options.php"]
+    }
   }
 }

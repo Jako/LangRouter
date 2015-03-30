@@ -40,7 +40,7 @@
 
 if ($modx->context->get('key') != "mgr") {
 
-    $debug = $modx->getOption('langrouter.debug', null, false);
+    $debug = $modx->getOption('langrouter.debug', null, false, true);
 
     /*
      * Debugs request handling
@@ -49,12 +49,12 @@ if ($modx->context->get('key') != "mgr") {
     {
         global $modx;
         $modx->log(modX::LOG_LEVEL_ERROR, $message . ':'
-            . "\n REQUEST_URI:   " . $_SERVER['REQUEST_URI']
-            . "\n REDIRECT_URI:  " . $_SERVER['REDIRECT_URI']
-            . "\n QUERY_STRING:  " . $_SERVER['QUERY_STRING']
-            . "\n q:             " . $_REQUEST['q']
-            . "\n Context:       " . $modx->context->get('key')
-            . "\n Site start:    " . $modx->context->getOption('site_start')
+        . "\n REQUEST_URI:   " . $_SERVER['REQUEST_URI']
+        . "\n REDIRECT_URI:  " . $_SERVER['REDIRECT_URI']
+        . "\n QUERY_STRING:  " . $_SERVER['QUERY_STRING']
+        . "\n q:             " . $_REQUEST['q']
+        . "\n Context:       " . ($modx->context) ? $modx->context->get('key') : '- none -'
+        . "\n Site start:    " . ($modx->context) ? $modx->context->getOption('site_start') : $modx->getOption('site_start')
         );
     }
 
@@ -105,7 +105,9 @@ if ($modx->context->get('key') != "mgr") {
     $languages = array();
     foreach ($babelContexts as $context) {
         $ctx = $modx->getContext($context);
-        $languages[$ctx->config['cultureKey']] = trim($context);
+        if (isset($ctx->config['cultureKey'])) {
+            $languages[$ctx->config['cultureKey']] = trim($context);
+        }
     }
     if ($debug) {
         $modx->log(modX::LOG_LEVEL_ERROR, dump($languages));
@@ -139,7 +141,8 @@ if ($modx->context->get('key') != "mgr") {
             if ($debug) {
                 logRequest('Culture key not found in URI');
             }
-            if ($switched && $siteUrl = $modx->context->getOption('site_url')) {
+            if ($switched && $modx->context) {
+                $siteUrl = $modx->context->getOption('site_url');
                 $modx->sendRedirect($siteUrl);
             }
         }
@@ -149,7 +152,8 @@ if ($modx->context->get('key') != "mgr") {
             if ($debug) {
                 $modx->log(modX::LOG_LEVEL_ERROR, 'Query is empty');
             }
-            $modx->sendForward($modx->context->getOption('site_start'));
+            $siteStart = ($modx->context) ? ($modx->context->getOption('site_start')) : $modx->getOption('site_start');
+            $modx->sendForward($siteStart);
         }
     }
 }

@@ -1,5 +1,10 @@
 Changelog for LangRouter
 
+LangRouter 1.0.1
+======================
+- Set babel.contextDefault system setting during package installation
+- Bugfixes
+
 LangRouter 1.0.0
 ======================
 - Initial public release for MODX Revolution
