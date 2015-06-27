@@ -17,10 +17,18 @@ if ($object->xpdo) {
                 $modx->log(xPDO::LOG_LEVEL_INFO, 'Set system setting "babel.contextDefault" to "' . $contextDefault . '"');
                 $setting = $modx->getObject('modSystemSetting', 'babel.contextDefault');
                 if (!$setting) {
-                    $setting = $modx->newObject('modSystemSetting', array('key', 'babel.contextDefault'));
+                    $setting = $modx->newObject('modSystemSetting');
+                    $setting->set('key', 'babel.contextDefault');
                 }
+
+                $babelNamespace = $modx->getObject('modNamespace', 'babel');
+                if (!$babelNamespace) {
+                    $modx->log(xPDO::LOG_LEVEL_ERROR, 'Babel has to be installed before LangRouter to create the settings. Please install Babel and reinstall LangRouter after.');
+                } else {
+                    $setting->addOne($babelNamespace);
+                }
+
                 $setting->set('value', $contextDefault);
-                $setting->set('namespace', 'babel');
                 $setting->set('area', 'common');
                 $setting->save();
             }

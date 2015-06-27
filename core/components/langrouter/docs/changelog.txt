@@ -1,5 +1,9 @@
 Changelog for LangRouter
 
+LangRouter 1.0.2
+======================
+- Bugfix for creating babel.contextDefault
+
 LangRouter 1.0.1
 ======================
 - Set babel.contextDefault system setting during package installation
