@@ -49,12 +49,12 @@ if ($modx->context->get('key') != "mgr") {
     {
         global $modx;
         $modx->log(modX::LOG_LEVEL_ERROR, $message . ':'
-        . "\n REQUEST_URI:   " . $_SERVER['REQUEST_URI']
-        . "\n REDIRECT_URI:  " . $_SERVER['REDIRECT_URI']
-        . "\n QUERY_STRING:  " . $_SERVER['QUERY_STRING']
-        . "\n q:             " . $_REQUEST['q']
-        . "\n Context:       " . ($modx->context) ? $modx->context->get('key') : '- none -'
-        . "\n Site start:    " . ($modx->context) ? $modx->context->getOption('site_start') : $modx->getOption('site_start')
+            . "\n REQUEST_URI:   " . $_SERVER['REQUEST_URI']
+            . "\n REDIRECT_URI:  " . $_SERVER['REDIRECT_URI']
+            . "\n QUERY_STRING:  " . $_SERVER['QUERY_STRING']
+            . "\n q:             " . $_REQUEST['q']
+            . "\n Context:       " . (($modx->context) ? $modx->context->get('key') : '- none -')
+            . "\n Site start:    " . (($modx->context) ? $modx->context->getOption('site_start') : $modx->getOption('site_start'))
         );
     }
 

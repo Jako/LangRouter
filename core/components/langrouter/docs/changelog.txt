@@ -1,5 +1,9 @@
 Changelog for LangRouter
 
+LangRouter 1.0.3
+======================
+- Bugfix for debug mode
+
 LangRouter 1.0.2
 ======================
 - Bugfix for creating babel.contextDefault
