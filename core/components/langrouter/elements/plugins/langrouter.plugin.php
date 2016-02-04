@@ -91,9 +91,9 @@ if ($modx->context->get('key') != "mgr") {
 
                 # sort list based on value
                 arsort($langs, SORT_NUMERIC);
-                return $langs;
             }
         }
+        return $langs;
     }
 
     if ($debug) {
@@ -114,15 +114,16 @@ if ($modx->context->get('key') != "mgr") {
     }
 
     # Determine language from request
-    $reqCultureKeyIdx = strpos($_REQUEST['q'], '/');
-    $reqCultureKey = substr($_REQUEST['q'], 0, $reqCultureKeyIdx);
+    $query = (isset($_REQUEST['q'])) ? $_REQUEST['q'] : '';
+    $reqCultureKeyIdx = strpos($query, '/');
+    $reqCultureKey = substr($query, 0, $reqCultureKeyIdx);
 
     if ($reqCultureKey) {
         # Serve the proper context and language
         if (array_key_exists(strtolower($reqCultureKey), array_change_key_case($languages))) {
             $modx->switchContext($reqCultureKey);
             # Remove cultureKey from request
-            $_REQUEST['q'] = substr($_REQUEST['q'], $reqCultureKeyIdx + 1);
+            $query = substr($query, $reqCultureKeyIdx + 1);
             if ($debug) {
                 logRequest('Culture key found in URI');
             }
@@ -148,7 +149,7 @@ if ($modx->context->get('key') != "mgr") {
         }
 
         # Serve site_start when no resource is requested
-        if (empty($_REQUEST['q'])) {
+        if (empty($query)) {
             if ($debug) {
                 $modx->log(modX::LOG_LEVEL_ERROR, 'Query is empty');
             }
