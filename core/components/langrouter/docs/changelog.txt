@@ -1,6 +1,9 @@
 Changelog for LangRouter
 ========================
 
+- 1.0.4
+    - Bugfix for web context
+    - The plugin sets a context specific locale (if defined)
 - 1.0.3
     - Bugfix for debug mode
 - 1.0.2

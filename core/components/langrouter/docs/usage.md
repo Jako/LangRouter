@@ -10,7 +10,9 @@ After (or before) the installation of LangRouter you have to prepare your contex
 6. Include the static files from the assets folder in your installation with `[[++assets_url]]path/to/static_file`, i.e. `<link href="[[++assets_url]]css/site.css" rel="stylesheet"/>` or `<img src="[[++assets_url]]images/whatever.jpg" … />`
 7. Set the MODX system setting **link_tag_scheme** to `-1` (URL is relative to site_url)
 
-## CAUTION
+To create these settings easily, you could use the [Cross Contexts Settings](https://modx.com/extras/package/crosscontextssettings) extra available on MODX Extras.
+
+## Caution
 
 Please don't activate the **friendly_urls_strict** MODX system setting, if you use LangRouter. That could cause nasty redirect loops.
 
