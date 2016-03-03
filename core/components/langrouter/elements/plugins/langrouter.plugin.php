@@ -121,7 +121,7 @@ if ($modx->context->get('key') != "mgr") {
     if ($reqCultureKey) {
         # Serve the proper context and language
         if (array_key_exists(strtolower($reqCultureKey), array_change_key_case($languages))) {
-            $modx->switchContext($reqCultureKey);
+            $modx->switchContext($languages[$reqCultureKey]);
             # Remove cultureKey from request
             $query = substr($query, $reqCultureKeyIdx + 1);
             if ($debug) {
