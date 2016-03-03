@@ -128,6 +128,12 @@ if ($modx->context->get('key') != "mgr") {
                 logRequest('Culture key found in URI');
             }
             $modx->cultureKey = $reqCultureKey;
+
+            // set locale since $modx->_initCulture is called before OnHandleRequest
+            if ($modx->getOption('setlocale', null, true)) {
+                $locale = setlocale(LC_ALL, null);
+                setlocale(LC_ALL, $modx->getOption('locale', null, $locale, true));
+            }
         } else {
             $clientCultureKey = array_flip(array_intersect_key(clientLangDetect(), $languages));
             if ($clientCultureKey) {
