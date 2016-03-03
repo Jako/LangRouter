@@ -23,23 +23,33 @@ rules in the webserver configuration. All routing is handled internally by MODX.
 This greatly simplifies the setup and provides portability. LangRouter was
 tested with Apache and Lighttpd.
 
-This version of LangRouter does not use different `site_url` context settings
-and redirects to `[[++site_url]][[++cultureKey]]/`. Because of that you don't
-have to use `[[++assets_url]]` for your static files but `[[++cultureKey]]/`
-before your MODX link tags.
+Usage
+=====
 
-CAUTION: Please don't activate the `friendly_urls_strict` system setting, if
-you are using LangRouter. That could cause nasty redirect loops.
+After (or before) the installation of LangRouter you have to prepare your
+contexts.
 
-Setup:
-1. Prepare your contexts as you normally would for Babel.
-2. For each context set `base_url` to `/`.
-3. For each context set `site_url` to
-    `{server_protocol}://{http_host}{base_url}{cultureKey}/`
-4. Add new system setting `babel.contextDefault` and set it to the default
-   context, which should be served when no language is specified in request,
-   eg. `pl`.
-5. Include static files from the assets folder with
-   `[[++assets_url]]path/to/static_file`. In head element use
+1. Create one context for each language with the later language subfolder name
+   as 'context key' and name it with the language name. Normally the context
+   key would be equal with the cultureKey of that language, i.e. `en` as
+   'context key' and `English` as 'context name'.
+2. Create the context setting 'base_url' in each context and set it to `/`.
+3. For each context create a 'site_url' context setting and fill it with the
+   following value: `{server_protocol}://{http_host}{base_url}{cultureKey}/`.
+   MODX handles the placeholder replacements in that setting on its own.
+4. Fill the MODX system setting 'babel.contextDefault' with the context key of
+   the default language, if you did not filled it during the Installation of
+   LangRouter.
+5. In head section of the template insert the following line
    `<base href="[[++site_url]]" />`.
-6. Use default URL generation scheme in MODX (ie. relative).
+6. Include the static files from the assets folder in your installation with
+   `[[++assets_url]]path/to/static_file`, i.e.
+   `<link href="[[++assets_url]]css/site.css" rel="stylesheet"/>` or
+   `<img src="[[++assets_url]]images/whatever.jpg" … />`
+7. Set the MODX system setting 'link_tag_scheme' to `-1`
+   (URL is relative to site_url)
+
+CAUTION
+=======
+
+Please don't activate the 'friendly_urls_strict' MODX system setting, if you use LangRouter. That could cause nasty redirect loops.
