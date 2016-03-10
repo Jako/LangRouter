@@ -3,7 +3,7 @@
   "lowCaseName": "langrouter",
   "description": "Language Router for Babel",
   "author": "gadamiak",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "package": {
     "elements": {
       "plugins": [
@@ -11,7 +11,10 @@
           "name": "LangRouter",
           "file": "langrouter.plugin.php",
           "events": [
-            "OnHandleRequest"
+            "OnHandleRequest",
+            "OnContextSave",
+            "OnContextRemove",
+            "OnSiteRefresh"
           ]
         }
       ]

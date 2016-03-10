@@ -12,6 +12,8 @@ After (or before) the installation of LangRouter you have to prepare your contex
 
 To create these settings easily, you could use the [Cross Contexts Settings](https://modx.com/extras/package/crosscontextssettings) extra available on MODX Extras.
 
+To debug the LangRouter configuration, set the MODX system setting debug in the namespace `langrouter` to true. The debug information is logged in the MODX error log.
+
 ## Caution
 
 Please don't activate the **friendly_urls_strict** MODX system setting, if you use LangRouter. That could cause nasty redirect loops.
