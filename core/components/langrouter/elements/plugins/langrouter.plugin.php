@@ -110,6 +110,12 @@ switch ($modx->event->name) {
     case 'OnContextRemove':
     case 'OnSiteRefresh':
 
+        // Init LangRouter service class
+        $corePath = $modx->getOption('langrouter.core_path', null, $modx->getOption('core_path') . 'components/langrouter/');
+        $langrouter = $modx->getService('langrouter', 'LangRouter', $corePath . 'model/langrouter/', array(
+            'core_path' => $corePath
+        ));
+
         // Cache contexts and their cultureKeys
         $babelContexts = explode(',', $modx->getOption('babel.contextKeys'));
         $contextmap = $langrouter->contextmap($babelContexts);
