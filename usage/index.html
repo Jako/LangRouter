@@ -115,7 +115,7 @@
 <ol>
 <li>Create one context for each language with the later language subfolder name as <strong>context key</strong> and name it with the language name. Normally the context key would be equal with the cultureKey of that language, i.e. <code>en</code> as <strong>context key</strong> and <code>English</code> as <strong>context name</strong>.</li>
 <li>Create the context setting <strong>base_url</strong> in each context and set it to <code>/</code>.</li>
-<li>For each context create a <strong>site_url</strong> context setting and fill it with the following value: <code>{server_protocol}://{http_host}{base_url}{cultureKey}/</code>. MODX handles the placeholder replacements in that setting on its own.</li>
+<li>For each context create a <strong>site_url</strong> context setting and fill it with the following value: <code>{url_scheme}{http_host}{base_url}{cultureKey}/</code>. MODX handles the placeholder replacements in that setting on its own.</li>
 <li>Fill the MODX system setting <strong>babel.contextDefault</strong> with the context key of the default language, if you did not filled it during the Installation of LangRouter.</li>
 <li>In head section of the template insert the following line <code>&lt;base href="[[++site_url]]" /&gt;</code>.</li>
 <li>Include the static files from the assets folder in your installation with <code>[[++assets_url]]path/to/static_file</code>, i.e. <code>&lt;link href="[[++assets_url]]css/site.css" rel="stylesheet"/&gt;</code> or <code>&lt;img src="[[++assets_url]]images/whatever.jpg" … /&gt;</code></li>
