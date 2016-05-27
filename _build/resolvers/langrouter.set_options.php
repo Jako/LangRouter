@@ -19,6 +19,7 @@ if ($object->xpdo) {
                 if (!$setting) {
                     $setting = $modx->newObject('modSystemSetting');
                     $setting->set('key', 'babel.contextDefault');
+                    $setting->set('area', 'system');
                 }
 
                 $babelNamespace = $modx->getObject('modNamespace', 'babel');
@@ -29,7 +30,7 @@ if ($object->xpdo) {
                 }
 
                 $setting->set('value', $contextDefault);
-                $setting->set('area', 'common');
+                $setting->set('area', 'system');
                 $setting->save();
             }
             break;
