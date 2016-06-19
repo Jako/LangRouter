@@ -1,5 +1,5 @@
 LangRouter
-================================================================================
+==========
 
 Installable extended Version of https://gist.github.com/gadamiak/3812853
 
