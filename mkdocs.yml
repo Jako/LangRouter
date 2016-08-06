@@ -1,5 +1,5 @@
 site_name: LangRouter
-docs_dir: core/components/langrouter/docs
+docs_dir: core/components/langrouter/docs/mkdocs
 site_dir: _build/site
 
 repo_url: https://github.com/Jako/LangRouter
