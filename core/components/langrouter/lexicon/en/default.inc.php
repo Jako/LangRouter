@@ -1,4 +1,4 @@
 <?php
-$_lang['setting_langrouter.debug'] = 'Log debug information';
-$_lang['setting_langrouter.debug_desc'] = 'Log debug information in MODX system log.';
+$_lang['setting_langrouter.debug'] = 'Debug';
+$_lang['setting_langrouter.debug_desc'] = 'Log debug informations in MODX error log.';
 
