@@ -123,3 +123,4 @@ switch ($modx->event->name) {
         break;
 
 }
+return;
