@@ -3,7 +3,7 @@
   "lowCaseName": "langrouter",
   "description": "Language Router for Babel",
   "author": "Grzegorz Adamiak",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "package": {
     "elements": {
       "plugins": [
