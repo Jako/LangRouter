@@ -1,6 +1,8 @@
 Changelog for LangRouter
 ========================
 
+- 1.0.8
+    - Bugfix for an error, when no client culture key was found
 - 1.0.7
     - Bugfix for compatibility with debugParser and other plugins
 - 1.0.6
