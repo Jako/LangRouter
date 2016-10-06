@@ -24,9 +24,7 @@ switch ($modx->event->name) {
             ));
 
             // Log start
-            if ($langrouter->getOption('debug')) {
-                $langrouter->logRequest('Unhandled request');
-            }
+            $langrouter->logRequest('Unhandled request');
 
             // Get contexts and their cultureKeys
             $contextmap = $modx->cacheManager->get($langrouter->getOption('cacheKey'), $langrouter->getOption('cacheOptions'));
@@ -52,9 +50,7 @@ switch ($modx->event->name) {
                     $_REQUEST[$queryKey] = substr($query, strlen($cultureKey) + 1);
 
                     // Log found
-                    if ($langrouter->getOption('debug')) {
-                        $langrouter->logRequest('Culture key found in URI');
-                    }
+                    $langrouter->logRequest('Culture key found in URI');
 
                     // Set culture key
                     $modx->cultureKey = $cultureKey;
@@ -83,23 +79,26 @@ switch ($modx->event->name) {
                     $switched = $modx->switchContext($contextmap[$cultureKey]);
 
                     // Log not found
-                    if ($langrouter->getOption('debug')) {
-                        $langrouter->logRequest('Culture key not found in URI');
-                    }
+                    $langrouter->logRequest('Culture key not found in URI');
 
                     // Redirect to valid context
-                    if ($switched && $modx->context) {
-                        $siteUrl = $modx->context->getOption('site_url');
-                        $modx->sendRedirect($siteUrl);
+                    if ($switched) {
+                        if (!empty($modx->context)) {
+                            $siteUrl = $modx->context->getOption('site_url');
+                            $modx->sendRedirect($siteUrl);
+                        } else {
+                            $langrouter->logMessage('The switched MODX context was not valid');
+                        }
                     } else {
-                        $langrouter->logMessage('Context switch was not valid.');
+                        $langrouter->logMessage('Context switch to "' . $contextmap[$cultureKey] . '" was not valid.');
                     }
                 }
 
                 // Serve site_start when no resource is requested
                 if (empty($_REQUEST[$queryKey])) {
                     $langrouter->logMessage('Query is empty.');
-                    $siteStart = ($modx->context) ? ($modx->context->getOption('site_start')) : $modx->getOption('site_start');
+                    $siteStart = (!empty($modx->context)) ? ($modx->context->getOption('site_start')) : $modx->getOption('site_start');
+                    $langrouter->logDump($siteStart, 'Send forward to site_start');
                     $modx->sendForward($siteStart);
                 }
             }
