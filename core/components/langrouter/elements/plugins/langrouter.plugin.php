@@ -66,17 +66,19 @@ switch ($modx->event->name) {
                     if ($clientCultureKey) {
                         // Use first entry of detected client culture key
                         $cultureKey = current($clientCultureKey);
+                        $contextKey = $contextmap[$cultureKey];
                         // Log detected
                         $langrouter->logDump($cultureKey, 'Detected culture key');
+                        $langrouter->logDump($contextKey, 'Detected context key');
                     } else {
                         // Use default context key
-                        $cultureKey = trim($modx->getOption('babel.contextDefault', null, 'web'));
+                        $contextKey = trim($modx->getOption('babel.contextDefault', null, 'web'));
                         // Log default
-                        $langrouter->logDump($cultureKey, 'Default culture key');
+                        $langrouter->logDump($contextKey, 'Default context key');
                     }
 
                     // Switch the context
-                    $switched = $modx->switchContext($contextmap[$cultureKey]);
+                    $switched = $modx->switchContext($contextKey);
 
                     // Log not found
                     $langrouter->logRequest('Culture key not found in URI');
@@ -90,7 +92,7 @@ switch ($modx->event->name) {
                             $langrouter->logMessage('The switched MODX context was not valid');
                         }
                     } else {
-                        $langrouter->logMessage('Context switch to "' . $contextmap[$cultureKey] . '" was not valid.');
+                        $langrouter->logMessage('Context switch to "' . $contextKey . '" was not valid.');
                     }
                 }
 
