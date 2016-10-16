@@ -108,6 +108,9 @@
         <li class="main active"><a href="#usage">Usage</a></li>
         
     
+        <li class="main "><a href="#system-settings">System settings</a></li>
+        
+    
         <li class="main "><a href="#caution">Caution</a></li>
         
     
@@ -127,7 +130,29 @@
 <li>Set the MODX system setting <strong>link_tag_scheme</strong> to <code>-1</code> (URL is relative to site_url)</li>
 </ol>
 <p>To create these settings easily, you could use the <a href="https://modx.com/extras/package/crosscontextssettings">Cross Contexts Settings</a> extra available on MODX Extras.</p>
-<p>To debug the LangRouter configuration, set the MODX system setting debug in the namespace <code>langrouter</code> to true. The debug information is logged in the MODX error log.</p>
+<h2 id="system-settings">System settings</h2>
+<p>The following MODX system settings are available in the namespace <code>langrouter</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>langrouter.debug</td>
+<td>Log debug informations in the MODX ystem log.</td>
+<td>No</td>
+</tr>
+<tr>
+<td>langrouter.response_code</td>
+<td>Response code for the redirect to the right context, if the culture key is not set.</td>
+<td><code>HTTP/1.1 301 Moved Permanently</code></td>
+</tr>
+</tbody>
+</table>
 <h2 id="caution">Caution</h2>
 <p>Please don't activate the <strong>friendly_urls_strict</strong> MODX system setting, if you use LangRouter. That could cause nasty redirect loops.</p>
 <!-- Piwik -->
