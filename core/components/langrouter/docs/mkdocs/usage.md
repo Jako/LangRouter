@@ -12,7 +12,14 @@ After (or before) the installation of LangRouter you have to prepare your contex
 
 To create these settings easily, you could use the [Cross Contexts Settings](https://modx.com/extras/package/crosscontextssettings) extra available on MODX Extras.
 
-To debug the LangRouter configuration, set the MODX system setting debug in the namespace `langrouter` to true. The debug information is logged in the MODX error log.
+## System settings
+
+The following MODX system settings are available in the namespace `langrouter`:
+
+Key | Description | Default
+----|-------------|--------
+langrouter.debug | Log debug informations in the MODX ystem log. | No
+langrouter.response_code | Response code for the redirect to the right context, if the culture key is not set. | `HTTP/1.1 301 Moved Permanently`
 
 ## Caution
 

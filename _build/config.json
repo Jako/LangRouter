@@ -2,8 +2,8 @@
   "name": "LangRouter",
   "lowCaseName": "langrouter",
   "description": "Language Router for Babel",
-  "author": "Grzegorz Adamiak",
-  "version": "1.0.8",
+  "author": "Grzegorz Adamiak, Thomas Jakobi",
+  "version": "1.1.0",
   "package": {
     "elements": {
       "plugins": [
@@ -25,6 +25,11 @@
         "type": "combo-boolean",
         "area": "system",
         "value": "0"
+      },
+      {
+        "key": "response_code",
+        "area": "system",
+        "value": "HTTP/1.1 301 Moved Permanently"
       }
     ]
   },

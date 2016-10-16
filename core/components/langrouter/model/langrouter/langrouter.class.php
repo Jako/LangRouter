@@ -77,6 +77,7 @@ class LangRouter
         // set default options
         $this->options = array_merge($this->options, array(
             'debug' => $this->getOption('debug', null, false),
+            'response_code' => $this->getOption('response_code', null, 'HTTP/1.1 301 Moved Permanently'),
             'cacheKey' => 'contextmap',
             'cacheOptions' => array(
                 xPDO::OPT_CACHE_KEY => $this->namespace,

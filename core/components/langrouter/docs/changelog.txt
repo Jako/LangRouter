@@ -1,6 +1,8 @@
 Changelog for LangRouter
 ========================
 
+- 1.1.0
+    - Response code for the redirect to the right context, if the culture key is not set (changeable by a MODX system setting).
 - 1.0.8
     - Bugfix for an error, when no client culture key was found
 - 1.0.7
