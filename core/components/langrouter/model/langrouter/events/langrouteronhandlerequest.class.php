@@ -48,20 +48,20 @@ class LangRouterOnHandleRequest extends LangRouterPlugin
                     }
                 } else {
                     // Culture key is has to be detected
-
                     $clientLangs = array_flip($this->langrouter->clientLangDetect());
 
-                    foreach($contextmap as $k => $v)
-                    {
+                    $clientCultureKey = '';
+                    foreach($contextmap as $k => $v) {
                         $context = explode('-', $v);
-                        $matches = preg_grep("/".$context[0]."/", $clientLangs);
+                        $matches = preg_grep('/' . $context[0] . '/', $clientLangs);
                         if (count($matches) > 0) {
-                          $clientCultureKey = $k;
+                            // Use first entry of detected client culture key
+                            $clientCultureKey = $k;
+                            break;
                         }
                     }
 
                     if ($clientCultureKey) {
-                        // Use first entry of detected client culture key
                         $cultureKey = $clientCultureKey;
                         $contextKey = $contextmap[$cultureKey];
                         // Log detected
