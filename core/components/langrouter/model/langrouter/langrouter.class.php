@@ -30,7 +30,7 @@ class LangRouter
      * The version
      * @var string $version
      */
-    public $version = '1.0.6';
+    public $version = '1.1.1';
 
     /**
      * The class options

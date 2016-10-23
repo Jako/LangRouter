@@ -1,0 +1,9 @@
+{
+  "name": "LangRouter",
+  "description": "Language Router for Babel",
+  "author": "Grzegorz Adamiak, Thomas Jakobi",
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-string-replace": "^1.3.1"
+  }
+}
