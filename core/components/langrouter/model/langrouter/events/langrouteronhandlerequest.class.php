@@ -101,6 +101,45 @@ class LangRouterOnHandleRequest extends LangRouterPlugin
                     $this->modx->sendForward($siteStart);
                 }
             }
+
+            if (!$cultureKey && $query != '') {
+              $clientLangs = array_flip($this->langrouter->clientLangDetect());
+
+              $clientCultureKey = '';
+              foreach($contextmap as $k => $v) {
+                  $context = explode('-', $v);
+
+                  $matches = preg_grep('/' . $context[0] . '/', $clientLangs);
+
+                  if (count($matches) > 0) {
+                      // Use first entry of detected client culture key
+                      $clientCultureKey = $k;
+                      break;
+                  }
+              }
+              if ($clientCultureKey) {
+
+                  $cultureKey = $clientCultureKey;
+                  $contextKey = $contextmap[$cultureKey];
+                  // Log detected
+                  $this->langrouter->logDump($cultureKey, 'Detected culture key');
+                  $this->langrouter->logDump($contextKey, 'Detected context key');
+              } else {
+                  // Use default context key
+                  $contextKey = trim($this->modx->getOption('babel.contextDefault', null, 'web'));
+
+                  // Log default
+                  $this->langrouter->logDump($contextKey, 'Default context key');
+              }
+
+              $switched = $this->modx->switchContext($contextKey);
+
+              $errorPage = (!empty($this->modx->context)) ? ($this->modx->context->getOption('error_page')) : $this->modx->getOption('error_page');
+
+              // Log default
+              $this->langrouter->logDump($contextKey, 'Default context key');
+              $this->modx->sendForward($errorPage);
+            }
         }
     }
 }
