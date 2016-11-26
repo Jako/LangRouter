@@ -4,8 +4,12 @@
  *
  * @package langrouter
  * @subpackage build
+ *
+ * @var array $options
+ * @var modX $modx
  */
-/* default values */
+
+// default values
 $values = array(
     'contextDefault' => 'web'
 );

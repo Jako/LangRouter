@@ -4,6 +4,9 @@
  *
  * @package langrouter
  * @subpackage build
+ *
+ * @var mixed $object
+ * @var array $options
  */
 if ($object->xpdo) {
     switch ($options[xPDOTransport::PACKAGE_ACTION]) {

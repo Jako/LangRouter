@@ -24,7 +24,7 @@ class LangRouterOnHandleRequest extends LangRouterPlugin
             // Determine language from request
             $queryKey = $this->modx->getOption('request_param_alias', null, 'q');
             $query = (isset($_REQUEST[$queryKey])) ? $_REQUEST[$queryKey] : '';
-            $cultureKey = substr($query, 0, strpos($query, '/'));
+            $cultureKey = (strpos($query, '/') !== false) ? substr($query, 0, strpos($query, '/')) : $query;
 
             if ($cultureKey || $query === '') {
                 // Serve the proper context and language
@@ -47,32 +47,8 @@ class LangRouterOnHandleRequest extends LangRouterPlugin
                         setlocale(LC_ALL, $this->modx->getOption('locale', null, $locale, true));
                     }
                 } else {
-                    // Culture key is has to be detected
-                    $clientLangs = array_flip($this->langrouter->clientLangDetect());
-
-                    $clientCultureKey = '';
-                    foreach($contextmap as $k => $v) {
-                        $context = explode('-', $v);
-                        $matches = preg_grep('/' . $context[0] . '/', $clientLangs);
-                        if (count($matches) > 0) {
-                            // Use first entry of detected client culture key
-                            $clientCultureKey = $k;
-                            break;
-                        }
-                    }
-
-                    if ($clientCultureKey) {
-                        $cultureKey = $clientCultureKey;
-                        $contextKey = $contextmap[$cultureKey];
-                        // Log detected
-                        $this->langrouter->logDump($cultureKey, 'Detected culture key');
-                        $this->langrouter->logDump($contextKey, 'Detected context key');
-                    } else {
-                        // Use default context key
-                        $contextKey = trim($this->modx->getOption('babel.contextDefault', null, 'web'));
-                        // Log default
-                        $this->langrouter->logDump($contextKey, 'Default context key');
-                    }
+                    // Detect context key
+                    $contextKey = $this->langrouter->contextKeyDetect($contextmap);
 
                     // Switch the context
                     $switched = $this->modx->switchContext($contextKey);
@@ -80,10 +56,15 @@ class LangRouterOnHandleRequest extends LangRouterPlugin
                     // Log not found
                     $this->langrouter->logRequest('Culture key not found in URI');
 
-                    // Redirect to valid context
                     if ($switched) {
                         if (!empty($this->modx->context)) {
-                            $siteUrl = $this->modx->context->getOption('site_url');
+                            $get = $_GET;
+                            unset($get[$queryKey]);
+                            $query = (empty($get)) ? $query : $query . '?' . http_build_query($get);
+                            $siteUrl = $this->modx->context->getOption('site_url') . $query;
+
+                            // Redirect to valid context
+                            $this->langrouter->logMessage('Redirect to ' . $siteUrl);
                             $this->modx->sendRedirect($siteUrl, array('responseCode' => $this->langrouter->getOption('response_code')));
                         } else {
                             $this->langrouter->logMessage('The switched MODX context was not valid');

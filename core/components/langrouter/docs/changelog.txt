@@ -1,6 +1,10 @@
 Changelog for LangRouter
 ========================
 
+- 1.1.2
+    - Preserve the original query parameters if the culture key is not set
+    - Preserve the original url path if the culture key is not set
+    - Bugfix for urls with no path delimiter and no culture key set
 - 1.1.1
     - Improve culture key and browser language match
 - 1.1.0

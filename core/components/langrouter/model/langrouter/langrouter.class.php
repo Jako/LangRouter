@@ -30,7 +30,7 @@ class LangRouter
      * The version
      * @var string $version
      */
-    public $version = '1.1.1';
+    public $version = '1.1.2';
 
     /**
      * The class options
@@ -135,14 +135,14 @@ class LangRouter
      *
      * @param string $message
      */
-    function logRequest($message = 'Request')
+    public function logRequest($message = 'Request')
     {
         if ($this->getOption('debug')) {
             $this->modx->log(modX::LOG_LEVEL_ERROR, $message . ':' .
-                "\nREQUEST_URI:   " . $_SERVER['REQUEST_URI'] .
-                "\nREDIRECT_URI:  " . $_SERVER['REDIRECT_URI'] .
-                "\nQUERY_STRING:  " . $_SERVER['QUERY_STRING'] .
-                "\nq:             " . $_REQUEST['q'] .
+                "\nREQUEST_URI:   " . htmlspecialchars($_SERVER['REQUEST_URI']) .
+                "\nREDIRECT_URI:  " . htmlspecialchars($_SERVER['REDIRECT_URI']) .
+                "\nQUERY_STRING:  " . htmlspecialchars($_SERVER['QUERY_STRING']) .
+                "\nq:             " . htmlspecialchars($_REQUEST['q']) .
                 "\nContext:       " . (($this->modx->context) ? $this->modx->context->get('key') : '- none -') .
                 "\nSite start:    " . (($this->modx->context) ? $this->modx->context->getOption('site_start') : $this->modx->getOption('site_start')),
                 '', 'LangRouter');
@@ -155,7 +155,7 @@ class LangRouter
      * @param mixed $var
      * @param string $name
      */
-    function logDump($var, $name = '')
+    public function logDump($var, $name = '')
     {
         if ($this->getOption('debug')) {
             $name = ($name) ? $name . ': ' : '';
@@ -171,7 +171,7 @@ class LangRouter
      *
      * @param string $message
      */
-    function logMessage($message = '')
+    public function logMessage($message = '')
     {
         if ($this->getOption('debug')) {
             $this->modx->log(modX::LOG_LEVEL_ERROR, $message, '', 'LangRouter');
@@ -184,7 +184,7 @@ class LangRouter
      *
      * @return array
      */
-    function clientLangDetect()
+    private function clientLangDetect()
     {
         $langs = array();
 
@@ -198,7 +198,9 @@ class LangRouter
 
                 // set default to 1 for any without q factor
                 foreach ($langs as $lang => $val) {
-                    if ($val === '') $langs[$lang] = 1;
+                    if ($val === '') {
+                        $langs[$lang] = 1;
+                    }
                 }
 
                 // sort list based on value
@@ -208,5 +210,37 @@ class LangRouter
         return $langs;
     }
 
+    /**
+     * @param array $contextmap
+     * @return string
+     */
+    public function contextKeyDetect($contextmap)
+    {
+        $clientLangs = array_flip($this->clientLangDetect());
 
+        $clientCultureKey = '';
+        foreach ($contextmap as $k => $v) {
+            $context = explode('-', $v);
+            $matches = preg_grep('/' . $context[0] . '/', $clientLangs);
+            if (count($matches) > 0) {
+                // Use first entry of detected client culture key
+                $clientCultureKey = $k;
+                break;
+            }
+        }
+
+        if ($clientCultureKey) {
+            $cultureKey = $clientCultureKey;
+            $contextKey = $contextmap[$cultureKey];
+            // Log detected
+            $this->logDump($cultureKey, 'Detected culture key');
+            $this->logDump($contextKey, 'Detected context key');
+        } else {
+            // Use default context key
+            $contextKey = trim($this->modx->getOption('babel.contextDefault', null, 'web'));
+            // Log default
+            $this->logDump($contextKey, 'Default context key');
+        }
+        return $contextKey;
+    }
 }
