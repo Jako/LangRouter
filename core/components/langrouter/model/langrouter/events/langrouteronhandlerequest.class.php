@@ -8,7 +8,7 @@ class LangRouterOnHandleRequest extends LangRouterPlugin
 {
     public function run()
     {
-        if ($this->modx->context->get('key') != "mgr") {
+        if ($this->modx->context->get('key') != "mgr" && MODX_API_MODE == false) {
             // Log start
             $this->langrouter->logRequest('Unhandled request');
 

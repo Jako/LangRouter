@@ -1,6 +1,8 @@
 Changelog for LangRouter
 ========================
 
+- 1.1.3
+    - Compatibility with ajaxMode of pdoPage
 - 1.1.2
     - Preserve the original query parameters if the culture key is not set
     - Preserve the original url path if the culture key is not set
