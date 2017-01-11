@@ -8,7 +8,7 @@ class LangRouterOnHandleRequest extends LangRouterPlugin
 {
     public function run()
     {
-        if ($this->modx->context->get('key') != "mgr" && MODX_API_MODE == false) {
+        if ($this->modx->context->get('key') != "mgr") {
             // Log start
             $this->langrouter->logRequest('Unhandled request');
 
@@ -24,7 +24,12 @@ class LangRouterOnHandleRequest extends LangRouterPlugin
             // Determine language from request
             $queryKey = $this->modx->getOption('request_param_alias', null, 'q');
             $query = (isset($_REQUEST[$queryKey])) ? $_REQUEST[$queryKey] : '';
-            $cultureKey = (strpos($query, '/') !== false) ? substr($query, 0, strpos($query, '/')) : $query;
+            
+            if(!isset($_COOKIE['cultureKey'])) {
+                $cultureKey = (strpos($query, '/') !== false) ? substr($query, 0, strpos($query, '/')) : $query;
+            } else {
+                $cultureKey = $_COOKIE['cultureKey'];
+            }
 
             if ($cultureKey || $query === '') {
                 // Serve the proper context and language
@@ -63,9 +68,19 @@ class LangRouterOnHandleRequest extends LangRouterPlugin
                             $query = (empty($get)) ? $query : $query . '?' . http_build_query($get);
                             $siteUrl = $this->modx->context->getOption('site_url') . $query;
 
-                            // Redirect to valid context
-                            $this->langrouter->logMessage('Redirect to ' . $siteUrl);
-                            $this->modx->sendRedirect($siteUrl, array('responseCode' => $this->langrouter->getOption('response_code')));
+                            $protocol = isset($_SERVER['HTTPS']) === true ? 'https' : 'http';
+                            $existing_siteUrl =  $protocol.'://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+
+                            if ($siteUrl != $existing_siteUrl) {
+                                
+                                // set cookie
+                                unset($_COOKIE['cultureKey']);
+                                setcookie('cultureKey', $this->modx->getOption('cultureKey'), strtotime('+6 months'));
+
+                                // Redirect to valid context
+                                $this->langrouter->logMessage('Redirect to ' . $siteUrl);
+                                $this->modx->sendRedirect($siteUrl, array('responseCode' => $this->langrouter->getOption('response_code')));
+                            }
                         } else {
                             $this->langrouter->logMessage('The switched MODX context was not valid');
                         }
