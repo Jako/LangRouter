@@ -3,7 +3,7 @@
  * LangRouter classfile
  *
  * Copyright 2012-2014 by Grzegorz Adamiak <https://github.com/gadamiak>
- * Copyright 2015-2016 by Thomas Jakobi <thomas.jakobi@partout.info>
+ * Copyright 2015-2017 by Thomas Jakobi <thomas.jakobi@partout.info>
  *
  * @package langrouter
  * @subpackage classfile
@@ -30,7 +30,7 @@ class LangRouter
      * The version
      * @var string $version
      */
-    public $version = '1.1.2';
+    public $version = '1.2.0';
 
     /**
      * The class options
@@ -193,7 +193,6 @@ class LangRouter
             preg_match_all('/([a-z]{1,8}(-[a-z]{1,8})?)\s*(;\s*q\s*=\s*(1|0\.[0-9]+))?/i', $_SERVER['HTTP_ACCEPT_LANGUAGE'], $lang_parse);
 
             if (count($lang_parse[1])) {
-                // create a list like "en" => 0.8
                 $langs = array_combine($lang_parse[1], $lang_parse[4]);
 
                 // set default to 1 for any without q factor
@@ -202,8 +201,6 @@ class LangRouter
                         $langs[$lang] = 1;
                     }
                 }
-
-                // sort list based on value
                 arsort($langs, SORT_NUMERIC);
             }
         }
@@ -211,6 +208,8 @@ class LangRouter
     }
 
     /**
+     * Detect a context key
+     *
      * @param array $contextmap
      * @return string
      */
@@ -218,27 +217,25 @@ class LangRouter
     {
         $clientLangs = array_flip($this->clientLangDetect());
 
-        $clientCultureKey = '';
+        $clientCultureKeys = array();
         foreach ($contextmap as $k => $v) {
-            $context = explode('-', $v);
+            $context = explode('-', $k);
             $matches = preg_grep('/' . $context[0] . '/', $clientLangs);
             if (count($matches) > 0) {
-                // Use first entry of detected client culture key
-                $clientCultureKey = $k;
-                break;
+                // Get the q factor of the current clientLang
+                $clientCultureKeys[$k] = floatval(key($matches));
             }
         }
+        arsort($clientCultureKeys, SORT_NUMERIC);
 
-        if ($clientCultureKey) {
-            $cultureKey = $clientCultureKey;
+        if (count($clientCultureKeys)) {
+            $cultureKey = key($clientCultureKeys);
             $contextKey = $contextmap[$cultureKey];
-            // Log detected
             $this->logDump($cultureKey, 'Detected culture key');
             $this->logDump($contextKey, 'Detected context key');
         } else {
             // Use default context key
             $contextKey = trim($this->modx->getOption('babel.contextDefault', null, 'web'));
-            // Log default
             $this->logDump($contextKey, 'Default context key');
         }
         return $contextKey;

@@ -9,7 +9,6 @@ class LangRouterOnHandleRequest extends LangRouterPlugin
     public function run()
     {
         if ($this->modx->context->get('key') != "mgr" && MODX_API_MODE == false) {
-            // Log start
             $this->langrouter->logRequest('Unhandled request');
 
             // Get contexts and their cultureKeys
@@ -24,41 +23,27 @@ class LangRouterOnHandleRequest extends LangRouterPlugin
             // Determine language from request
             $queryKey = $this->modx->getOption('request_param_alias', null, 'q');
             $query = (isset($_REQUEST[$queryKey])) ? $_REQUEST[$queryKey] : '';
-            
-            if(!isset($_COOKIE['cultureKey'])) {
-                $cultureKey = (strpos($query, '/') !== false) ? substr($query, 0, strpos($query, '/')) : $query;
-            } else {
-                $cultureKey = $_COOKIE['cultureKey'];
-            }
+
+            $cultureKey = (strpos($query, '/') !== false) ? substr($query, 0, strpos($query, '/')) : $query;
 
             if ($cultureKey || $query === '') {
                 // Serve the proper context and language
                 if (array_key_exists(strtolower($cultureKey), array_change_key_case($contextmap))) {
-                    // Culture key is found, so switch the context
-                    $this->modx->switchContext($contextmap[$cultureKey]);
+                    $contextKey = $this->modx->context->get('key');
+                    if ($contextKey != $contextmap[$cultureKey]) {
+                        $this->modx->switchContext($contextmap[$cultureKey]);
+                    }
 
                     // Remove cultureKey from request
-                    $_REQUEST[$queryKey] = substr($query, strlen($cultureKey) + 1);
+                    $_REQUEST[$queryKey] = preg_replace('~^' . preg_quote($cultureKey, '~') . '/(.*)~', '$1', $_REQUEST[$queryKey]);
+                    $_SERVER['REQUEST_URI'] = preg_replace('~^/' . preg_quote($cultureKey, '~') . '/(.*)~', '/$1', $_SERVER['REQUEST_URI']);
 
-                    // Log found
                     $this->langrouter->logRequest('Culture key found in URI');
-
-                    // Set culture key
                     $this->modx->cultureKey = $cultureKey;
-
-                    // Set locale since $this->modx->_initCulture is called before OnHandleRequest
-                    if ($this->modx->getOption('setlocale', null, true)) {
-                        $locale = setlocale(LC_ALL, null);
-                        setlocale(LC_ALL, $this->modx->getOption('locale', null, $locale, true));
-                    }
                 } else {
-                    // Detect context key
                     $contextKey = $this->langrouter->contextKeyDetect($contextmap);
 
-                    // Switch the context
                     $switched = $this->modx->switchContext($contextKey);
-
-                    // Log not found
                     $this->langrouter->logRequest('Culture key not found in URI');
 
                     if ($switched) {
@@ -68,15 +53,9 @@ class LangRouterOnHandleRequest extends LangRouterPlugin
                             $query = (empty($get)) ? $query : $query . '?' . http_build_query($get);
                             $siteUrl = $this->modx->context->getOption('site_url') . $query;
 
-                            $protocol = isset($_SERVER['HTTPS']) === true ? 'https' : 'http';
-                            $existing_siteUrl =  $protocol.'://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+                            $currentUrl = (isset($_SERVER['HTTPS']) === true ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
-                            if ($siteUrl != $existing_siteUrl) {
-                                
-                                // set cookie
-                                unset($_COOKIE['cultureKey']);
-                                setcookie('cultureKey', $this->modx->getOption('cultureKey'), strtotime('+6 months'));
-
+                            if ($siteUrl != $currentUrl) {
                                 // Redirect to valid context
                                 $this->langrouter->logMessage('Redirect to ' . $siteUrl);
                                 $this->modx->sendRedirect($siteUrl, array('responseCode' => $this->langrouter->getOption('response_code')));
@@ -89,12 +68,10 @@ class LangRouterOnHandleRequest extends LangRouterPlugin
                     }
                 }
 
-                // Serve site_start when no resource is requested
-                if (empty($_REQUEST[$queryKey])) {
-                    $this->langrouter->logMessage('Query is empty.');
-                    $siteStart = (!empty($this->modx->context)) ? ($this->modx->context->getOption('site_start')) : $this->modx->getOption('site_start');
-                    $this->langrouter->logDump($siteStart, 'Send forward to site_start');
-                    $this->modx->sendForward($siteStart);
+                // Set locale since $this->modx->_initCulture is called before OnHandleRequest
+                if ($this->modx->getOption('setlocale', null, true)) {
+                    $locale = setlocale(LC_ALL, null);
+                    setlocale(LC_ALL, $this->modx->context->getOption('locale', $locale));
                 }
             }
         }
