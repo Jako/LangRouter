@@ -121,15 +121,39 @@
 <h2 id="usage">Usage</h2>
 <p>After (or before) the installation of LangRouter you have to prepare your contexts.</p>
 <ol>
-<li>Create one context for each language with the later language subfolder name as <strong>context key</strong> and name it with the language name. Normally the context key would be equal with the cultureKey of that language, i.e. <code>en</code> as <strong>context key</strong> and <code>English</code> as <strong>context name</strong>.</li>
+<li>Create one context for each language and name it with the language name. Normally the context key would be equal with the cultureKey context setting of that language, i.e. <code>en</code> as <strong>context key</strong> and <code>English</code> as <strong>context name</strong> when the cultureKey is <code>en</code>.</li>
 <li>Create the context setting <strong>base_url</strong> in each context and set it to <code>/</code>.</li>
+<li>Create the context setting <strong>cultureKey</strong> in each context and set it to the according cultureKey, i.e. <code>en</code>.</li>
 <li>For each context create a <strong>site_url</strong> context setting and fill it with the following value: <code>{url_scheme}{http_host}{base_url}{cultureKey}/</code>. MODX handles the placeholder replacements in that setting on its own.</li>
-<li>Fill the MODX system setting <strong>babel.contextDefault</strong> with the context key of the default language, if you did not filled it during the Installation of LangRouter.</li>
+<li>Fill the MODX system setting <strong>babel.contextDefault</strong> with the context key of the default language, if you did not fill this during the installation of LangRouter.</li>
 <li>In head section of the template insert the following line <code>&lt;base href="[[!++site_url]]" /&gt;</code>.</li>
-<li>Include the static files from the assets folder in your installation with <code>[[++assets_url]]path/to/static_file</code>, i.e. <code>&lt;link href="[[++assets_url]]css/site.css" rel="stylesheet"/&gt;</code> or <code>&lt;img src="[[++assets_url]]images/whatever.jpg" … /&gt;</code></li>
+<li>Include the static files from the assets folder in your installation with <code>[[++assets_url]]path/to/static_file</code>, i.e. <code>&lt;link href="[[++assets_url]]css/site.css" rel="stylesheet"/&gt;</code> or <code>&lt;img src="[[++assets_url]]images/whatever.jpg" … /&gt;</code>. You could use <code>[[++base_url]]path/to/static_file</code>, if your assets are not located xinside of the assets folder.</li>
 <li>Set the MODX system setting <strong>link_tag_scheme</strong> to <code>-1</code> (URL is relative to site_url)</li>
 </ol>
 <p>To create these settings easily, you could use the <a href="https://modx.com/extras/package/crosscontextssettings">Cross Contexts Settings</a> extra available on MODX Extras.</p>
+<p>Example settings for an <code>en</code> context</p>
+<table>
+<thead>
+<tr>
+<th>Context setting</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>base_url</td>
+<td><code>/</code></td>
+</tr>
+<tr>
+<td>cultureKey</td>
+<td><code>en</code></td>
+</tr>
+<tr>
+<td>site_url</td>
+<td><code>{url_scheme}{http_host}{base_url}{cultureKey}/</code></td>
+</tr>
+</tbody>
+</table>
 <h2 id="system-settings">System settings</h2>
 <p>The following MODX system settings are available in the namespace <code>langrouter</code>:</p>
 <table>
