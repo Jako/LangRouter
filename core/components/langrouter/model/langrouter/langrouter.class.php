@@ -219,8 +219,8 @@ class LangRouter
 
         $clientCultureKeys = array();
         foreach ($contextmap as $k => $v) {
-            $context = explode('-', $k);
-            $matches = preg_grep('/' . $context[0] . '/', $clientLangs);
+            $context = preg_split('/[-_]/', $k);
+            $matches = preg_grep('/^' . $context[0] . '/', $clientLangs);
             if (count($matches) > 0) {
                 // Get the q factor of the current clientLang
                 $clientCultureKeys[$k] = floatval(key($matches));
