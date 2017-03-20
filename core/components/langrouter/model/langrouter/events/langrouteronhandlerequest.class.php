@@ -14,7 +14,7 @@ class LangRouterOnHandleRequest extends LangRouterPlugin
             // Get contexts and their cultureKeys
             $contextmap = $this->modx->cacheManager->get($this->langrouter->getOption('cacheKey'), $this->langrouter->getOption('cacheOptions'));
             if (empty($contextmap)) {
-                $babelContexts = explode(',', $this->modx->getOption('babel.contextKeys'));
+                $babelContexts = explode(',', $this->modx->getOption('langrouter.contextKeys', null, $this->modx->getOption('babel.contextKeys'), true));
                 $contextmap = $this->langrouter->contextmap($babelContexts);
                 $this->modx->cacheManager->set($this->langrouter->getOption('cacheKey'), $contextmap, 0, $this->langrouter->getOption('cacheOptions'));
             }
