@@ -126,6 +126,12 @@ class LangRouter
             if (isset($ctx->config['cultureKey'])) {
                 $contextmap[$ctx->config['cultureKey']] = trim($context);
             }
+            if (isset($ctx->config['cultureKeyAlias'])) {
+                $contextAliases = explode(',', $ctx->config['cultureKeyAlias']);
+                foreach ($contextAliases as $contextAlias) {
+                    $contextmap[$contextAlias] = trim($context);
+                }
+            }
         }
         return $contextmap;
     }
