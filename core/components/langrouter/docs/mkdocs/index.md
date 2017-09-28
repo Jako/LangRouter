@@ -1,4 +1,4 @@
-# Intro
+# LangRouter
 
 LangRouter is a language routing plugin for MODx Revolution that is meant to be used with Babel. It takes care of switching contexts that hold the translations, depending on the URL requested by the client.
 
