@@ -1,16 +1,34 @@
 site_name: LangRouter
 docs_dir: core/components/langrouter/docs/mkdocs
 site_dir: _build/site
+edit_uri: tree/master/core/components/langrouter/docs/mkdocs
 
+repo_name: 'Jako/LangRouter'
 repo_url: https://github.com/Jako/LangRouter
 
+copyright: '&copy; 2015-2017 <a href="https://treehillstudio.com">Treehill Studio</a>'
+
 pages:
-- Home: 'index.md'
+- Description: 'index.md'
 - Installation: 'installation.md'
 - Usage: 'usage.md'
+- Donate: 'donate.md'
 
-theme: flatly
+extra:
+  font:
+    text: 'Dosis'
+    heading: 'Ubuntu'
+
+piwik_analytics:
+  site_id: 15
+  piwik_url: '//piwik.partout.info/'
+
+theme: 'material'
+theme_dir: '/Users/jako/Documents/MODx/MkDocs Material/material'
 
 markdown_extensions:
-    - footnotes
-    - tables
+  - footnotes
+  - tables
+  - admonition
+  - meta
+  - toc(permalink=true)

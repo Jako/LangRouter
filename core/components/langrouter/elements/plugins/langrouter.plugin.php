@@ -1,13 +1,15 @@
 <?php
 /**
- * LangRouter
+ * LangRouter Plugin
  *
  * @package langrouter
- * @subpackage plugin
+ * @subpackage pluginfile
  *
  * @var modX $modx
  * @var array $scriptProperties
  */
+
+$className = 'LangRouter' . $modx->event->name;
 
 $corePath = $modx->getOption('langrouter.core_path', null, $modx->getOption('core_path') . 'components/langrouter/');
 /** @var LangRouter $langrouter */
@@ -15,7 +17,6 @@ $langrouter = $modx->getService('langrouter', 'LangRouter', $corePath . 'model/l
     'core_path' => $corePath
 ));
 
-$className = 'LangRouter' . $modx->event->name;
 $modx->loadClass('LangRouterPlugin', $langrouter->getOption('modelPath') . 'langrouter/events/', true, true);
 $modx->loadClass($className, $langrouter->getOption('modelPath') . 'langrouter/events/', true, true);
 if (class_exists($className)) {

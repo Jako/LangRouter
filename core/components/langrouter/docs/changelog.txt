@@ -1,6 +1,10 @@
 Changelog for LangRouter
 ========================
 
+- 1.3.0-rc1
+    - Improved context key detection
+    - Added langrouter.contextKeys and langrouter.contextDefault system setting
+    - Added handling of cultureKeyAliases context setting
 - 1.2.0
     - Allow the default language to be served at /
     - Bugfix for not detected language context
