@@ -265,6 +265,26 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#usage-with-other-extras" title="Usage with other extras" class="md-nav__link">
+    Usage with other extras
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pthumb" title="pThumb" class="md-nav__link">
+    pThumb
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
       
       
     </ul>
@@ -328,6 +348,26 @@
   <a href="#system-settings" title="System settings" class="md-nav__link">
     System settings
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage-with-other-extras" title="Usage with other extras" class="md-nav__link">
+    Usage with other extras
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pthumb" title="pThumb" class="md-nav__link">
+    pThumb
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -417,6 +457,14 @@ on MODX Extras.</p>
 <p class="admonition-title">Caution</p>
 <p>Please don't activate the <strong>friendly_urls_strict</strong> MODX system setting, if you use LangRouter. That could cause nasty redirect loops.</p>
 </div>
+<h2 id="usage-with-other-extras">Usage with other extras<a class="headerlink" href="#usage-with-other-extras" title="Permanent link">&para;</a></h2>
+<p>Some extras settings have to be changed to work well with LangRouter (and other
+routing plugins):</p>
+<h3 id="pthumb">pThumb<a class="headerlink" href="#pthumb" title="Permanent link">&para;</a></h3>
+<p>Please set the system setting <code>phpthumbof.cache_url</code> to <code>/</code>. Otherwise the
+generated thumbnail path of the snippet/output filter will contain the
+<code>{base_url}{cultureKey}</code> prefix, that needs an additional .htaccess rule that
+removes this prefix.</p>
                 
                   
                 
