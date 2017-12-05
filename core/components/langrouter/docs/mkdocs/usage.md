@@ -37,3 +37,15 @@ langrouter.response_code | Response code for the redirect to the right context, 
 
 !!! caution 
     Please don't activate the **friendly_urls_strict** MODX system setting, if you use LangRouter. That could cause nasty redirect loops.
+    
+## Usage with other extras 
+
+Some extras settings have to be changed to work well with LangRouter (and other
+routing plugins):
+
+### pThumb
+
+Please set the system setting `phpthumbof.cache_url` to `/`. Otherwise the
+generated thumbnail path of the snippet/output filter will contain the
+`{base_url}{cultureKey}` prefix, that needs an additional .htaccess rule that
+removes this prefix.
