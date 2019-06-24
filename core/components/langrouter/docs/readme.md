@@ -1,5 +1,4 @@
-LangRouter
-==========
+# LangRouter
 
 LangRouter is a language routing plugin for MODx Revolution that is meant to be
 used with Babel. It takes care of switching contexts that hold the translations,
@@ -9,14 +8,14 @@ LangRouter is an installable extended version of
 https://gist.github.com/gadamiak/3812853. Thanks to gadamiak for the permission
 to use his code.
 
-Installation
-------------
+## Installation
+
 MODX Package Management
 
-Documentation
--------------
+## Documentation
+
 http://jako.github.io/LangRouter/
 
-GitHub Repository
------------------
+## GitHub Repository
+
 https://github.com/Jako/LangRouter
