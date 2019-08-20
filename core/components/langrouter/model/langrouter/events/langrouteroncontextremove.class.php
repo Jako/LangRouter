@@ -1,9 +1,9 @@
 <?php
-
 /**
  * @package langrouter
  * @subpackage plugin
  */
+
 class LangRouterOnContextRemove extends LangRouterPlugin
 {
     public function run()

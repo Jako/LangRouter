@@ -9,4 +9,4 @@ https://gist.github.com/gadamiak/3812853. Thanks to gadamiak for the permission
 to use his code.
 
 For more information please read the
-[documentation](http://jako.github.io/LangRouter/).
+[documentation](https://jako.github.io/LangRouter/).

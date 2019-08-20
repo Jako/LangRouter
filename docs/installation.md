@@ -1,8 +1,8 @@
 ## Install from MODX Extras
 
-Search for LangRouter in the Package Manager of your MODX installation and
-install it in there. You have to fill the context key of the default language
-during the setup. See in [Usage](/usage/) for the possible value.
+Search for LangRouter in the Package Manager of a MODX installation and install
+it in there. You have to fill the context key of the default language during the
+setup. See in [Usage](/usage/) for the possible value.
 
 ## Manual installation
 
@@ -11,7 +11,7 @@ can manually install LangRouter.
 
 * Download the transport package from [MODX Extras](https://modx.com/extras/package/langrouter) (or one of the pre built transport packages in [_packages](https://github.com/Jako/LangRouter/tree/master/_packages))
 * Upload the zip file to your MODX installation's `core/packages` folder or upload it manually in the MODX Package Manager.
-* In the Package Manager of your MODX installation select 'Search locally for packages' from the dropdown button.
+* In the MODX Manager, navigate to the Package Manager page, and select 'Search locally for packages' from the dropdown button.
 * LangRouter should now show up in the list of available packages. Click the corresponding 'Install' button and follow the instructions to complete the installation.
 
 ## Build it from source

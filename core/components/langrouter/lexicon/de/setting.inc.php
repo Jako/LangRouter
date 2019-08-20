@@ -1,4 +1,10 @@
 <?php
+/**
+ * Setting Lexicon Entries for LangRouter
+ *
+ * @package crosslinks
+ * @subpackage lexicon
+ */
 $_lang['setting_langrouter.debug'] = 'Debug';
 $_lang['setting_langrouter.debug_desc'] = 'Debug-Informationen im MODX Fehlerprotokoll ausgeben.';
 $_lang['setting_langrouter.response_code'] = 'Statuscode';

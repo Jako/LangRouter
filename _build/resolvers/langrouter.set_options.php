@@ -1,6 +1,6 @@
 <?php
 /**
- * Set install options.
+ * Setup options
  *
  * @package langrouter
  * @subpackage build
@@ -8,12 +8,13 @@
  * @var mixed $object
  * @var array $options
  */
+
 if ($object->xpdo) {
     switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         case xPDOTransport::ACTION_INSTALL:
         case xPDOTransport::ACTION_UPGRADE:
             /** @var modX $modx */
-            $modx =& $object->xpdo;
+            $modx = &$object->xpdo;
 
             $contextDefault = $modx->getOption('contextDefault', $options, false);
             if ($contextDefault) {

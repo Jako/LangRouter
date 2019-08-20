@@ -1,5 +1,12 @@
 # LangRouter
 
+Language context router for use with Babel.
+
+- Author: Thomas Jakobi <thomas.jakobi@partout.info>
+- License: GNU GPLv2
+
+## Features
+
 LangRouter is a language routing plugin for MODx Revolution that is meant to be
 used with Babel. It takes care of switching contexts that hold the translations,
 depending on the URL requested by the client.
@@ -14,7 +21,7 @@ MODX Package Management
 
 ## Documentation
 
-http://jako.github.io/LangRouter/
+For more information please read the documentation on https://jako.github.io/LangRouter/
 
 ## GitHub Repository
 

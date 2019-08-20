@@ -44,9 +44,10 @@ class LangRouter
      * @param modX $modx A reference to the modX instance.
      * @param array $options An array of options. Optional.
      */
-    function __construct(modX &$modx, $options = array())
+    public function __construct(modX &$modx, $options = array())
     {
         $this->modx = &$modx;
+        $this->namespace = $this->getOption('namespace', $options, $this->namespace);
 
         $corePath = $this->getOption('core_path', $options, $this->modx->getOption('core_path') . "components/{$this->namespace}/");
         $assetsPath = $this->getOption('assets_path', $options, $this->modx->getOption('assets_path') . "components/{$this->namespace}/");
@@ -56,12 +57,6 @@ class LangRouter
         $this->options = array_merge(array(
             'namespace' => $this->namespace,
             'version' => $this->version,
-            'assetsPath' => $assetsPath,
-            'assetsUrl' => $assetsUrl,
-            'cssUrl' => $assetsUrl . 'css/',
-            'jsUrl' => $assetsUrl . 'js/',
-            'imagesUrl' => $assetsUrl . 'images/',
-            'connectorUrl' => $assetsUrl . 'connector.php',
             'corePath' => $corePath,
             'modelPath' => $corePath . 'model/',
             'vendorPath' => $corePath . 'vendor/',
@@ -72,12 +67,18 @@ class LangRouter
             'controllersPath' => $corePath . 'controllers/',
             'processorsPath' => $corePath . 'processors/',
             'templatesPath' => $corePath . 'templates/',
+            'assetsPath' => $assetsPath,
+            'assetsUrl' => $assetsUrl,
+            'jsUrl' => $assetsUrl . 'js/',
+            'cssUrl' => $assetsUrl . 'css/',
+            'imagesUrl' => $assetsUrl . 'images/',
+            'connectorUrl' => $assetsUrl . 'connector.php'
         ), $options);
 
-        // set default options
+        // Add default options
         $this->options = array_merge($this->options, array(
-            'debug' => $this->getOption('debug', null, false),
-            'response_code' => $this->getOption('response_code', null, 'HTTP/1.1 301 Moved Permanently'),
+            'debug' => (bool)$this->getOption('debug', $options, false),
+            'response_code' => $this->getOption('response_code', $options, 'HTTP/1.1 301 Moved Permanently'),
             'cacheKey' => 'contextmap',
             'cacheOptions' => array(
                 xPDO::OPT_CACHE_KEY => $this->namespace,
@@ -85,7 +86,8 @@ class LangRouter
             )
         ));
 
-        $this->modx->lexicon->load("{$this->namespace}:default");
+        $lexicon = $this->modx->getService('lexicon', 'modLexicon');
+        $lexicon->load($this->namespace . ':default');
     }
 
     /**

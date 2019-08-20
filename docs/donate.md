@@ -1,9 +1,11 @@
 ## Support LangRouter
 
-*LangRouter* is and always will be free and open-source, but it still requires many man-hours of development, 
-bug-fixing, support in MODX forums and on GitHub between the releases.
+*LangRouter* is and always will be free and open-source, but it still requires
+*many man-hours of development, bug-fixing, support in MODX forums and on GitHub
+*between the releases.
 
-Please support the ongoing and past development of *LangRouter* by making a donation below.
+Please support the ongoing and past development of *LangRouter* by making a
+donation below.
 
 <div style="margin-bottom: 2em">
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">

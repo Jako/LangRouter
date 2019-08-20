@@ -1,9 +1,9 @@
 <?php
-
 /**
  * @package langrouter
  * @subpackage plugin
  */
+
 class LangRouterOnHandleRequest extends LangRouterPlugin
 {
     public function run()
