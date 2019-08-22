@@ -34,6 +34,7 @@ Key | Description | Default
 ----|-------------|--------
 langrouter.debug | Log debug informations in the MODX ystem log. | No
 langrouter.response_code | Response code for the redirect to the right context, if the culture key is not set. | `HTTP/1.1 301 Moved Permanently`
+langrouter.contextKeys | **(optional)** Comma separated list of context keys which could be switched to. Defaults to the `babel.contextKeys` system setting. | -
 
 !!! caution 
     Please don't activate the **friendly_urls_strict** MODX system setting, if you use LangRouter. That could cause nasty redirect loops.
