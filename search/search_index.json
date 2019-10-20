@@ -72,12 +72,12 @@
         }, 
         {
             "location": "/donate/", 
-            "text": "Support LangRouter\n\n\nLangRouter\n is and always will be free and open-source, but it still requires\n\nmany man-hours of development, bug-fixing, support in MODX forums and on GitHub\n\nbetween the releases.\n\n\nPlease support the ongoing and past development of \nLangRouter\n by making a\ndonation below.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nLangRouter\n development is sponsored by Treehillstudio \u2013 MODX Development in M\u00fcnsterland.", 
+            "text": "Support LangRouter\n\n\nLangRouter\n is and always will be free and open-source, but it still requires\nmany man-hours of development, bug-fixing, support in MODX forums and on GitHub\nbetween the releases.\n\n\nPlease support the ongoing and past development of \nLangRouter\n by making a\ndonation below.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nLangRouter\n development is sponsored by Treehillstudio \u2013 MODX Development in M\u00fcnsterland.", 
             "title": "Donate"
         }, 
         {
             "location": "/donate/#support-langrouter", 
-            "text": "LangRouter  is and always will be free and open-source, but it still requires many man-hours of development, bug-fixing, support in MODX forums and on GitHub between the releases.  Please support the ongoing and past development of  LangRouter  by making a\ndonation below.           LangRouter  development is sponsored by Treehillstudio \u2013 MODX Development in M\u00fcnsterland.", 
+            "text": "LangRouter  is and always will be free and open-source, but it still requires\nmany man-hours of development, bug-fixing, support in MODX forums and on GitHub\nbetween the releases.  Please support the ongoing and past development of  LangRouter  by making a\ndonation below.            LangRouter  development is sponsored by Treehillstudio \u2013 MODX Development in M\u00fcnsterland.", 
             "title": "Support LangRouter"
         }
     ]
