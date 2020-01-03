@@ -223,7 +223,7 @@ class LangRouter
      */
     public function contextKeyDetect($contextmap)
     {
-        $clientLangs = array_flip($this->clientLangDetect());
+        $clientLangs = $this->clientLangDetect();
 
         $clientCultureKeys = array();
         foreach ($contextmap as $k => $v) {
