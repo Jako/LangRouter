@@ -3,7 +3,7 @@
  * LangRouter classfile
  *
  * Copyright 2012-2014 by Grzegorz Adamiak <https://github.com/gadamiak>
- * Copyright 2015-2019 by Thomas Jakobi <thomas.jakobi@partout.info>
+ * Copyright 2015-2020 by Thomas Jakobi <thomas.jakobi@partout.info>
  *
  * @package langrouter
  * @subpackage classfile
@@ -30,7 +30,7 @@ class LangRouter
      * The version
      * @var string $version
      */
-    public $version = '1.3.1';
+    public $version = '1.3.2';
 
     /**
      * The class options
@@ -203,10 +203,14 @@ class LangRouter
             if (count($lang_parse[1])) {
                 $langs = array_combine($lang_parse[1], $lang_parse[4]);
 
-                // set default to 1 for any without q factor
+                // set default to 1 (or decremented by 0.01) for any language without q factor
+                $q = 1;
                 foreach ($langs as $lang => $val) {
                     if ($val === '') {
-                        $langs[$lang] = 1;
+                        $langs[$lang] = $q;
+                        $q -= 0.01;
+                    } else {
+                        $q = $val - 0.01;
                     }
                 }
                 arsort($langs, SORT_NUMERIC);
