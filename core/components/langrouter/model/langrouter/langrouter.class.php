@@ -46,12 +46,12 @@ class LangRouter
      */
     public function __construct(modX &$modx, $options = array())
     {
-        $this->modx = &$modx;
+        $this->modx =& $modx;
         $this->namespace = $this->getOption('namespace', $options, $this->namespace);
 
-        $corePath = $this->getOption('core_path', $options, $this->modx->getOption('core_path') . "components/{$this->namespace}/");
-        $assetsPath = $this->getOption('assets_path', $options, $this->modx->getOption('assets_path') . "components/{$this->namespace}/");
-        $assetsUrl = $this->getOption('assets_url', $options, $this->modx->getOption('assets_url') . "components/{$this->namespace}/");
+        $corePath = $this->getOption('core_path', $options, $this->modx->getOption('core_path', null, MODX_CORE_PATH) . 'components/' . $this->namespace . '/');
+        $assetsPath = $this->getOption('assets_path', $options, $this->modx->getOption('assets_path', null, MODX_ASSETS_PATH) . 'components/' . $this->namespace . '/');
+        $assetsUrl = $this->getOption('assets_url', $options, $this->modx->getOption('assets_url', null, MODX_ASSETS_URL) . 'components/' . $this->namespace . '/');
 
         // Load some default paths for easier management
         $this->options = array_merge(array(
@@ -78,12 +78,12 @@ class LangRouter
         // Add default options
         $this->options = array_merge($this->options, array(
             'debug' => (bool)$this->getOption('debug', $options, false),
-            'response_code' => $this->getOption('response_code', $options, 'HTTP/1.1 301 Moved Permanently'),
-            'cacheKey' => 'contextmap',
+            'cacheKey' => $this->namespace . '.contextmap',
             'cacheOptions' => array(
                 xPDO::OPT_CACHE_KEY => $this->namespace,
                 xPDO::OPT_CACHE_HANDLER => $this->modx->getOption('cache_resource_handler', null, $this->modx->getOption(xPDO::OPT_CACHE_HANDLER, null, 'xPDOFileCache')),
-            )
+            ),
+            'response_code' => $this->getOption('response_code', $options, 'HTTP/1.1 301 Moved Permanently'),
         ));
 
         $lexicon = $this->modx->getService('lexicon', 'modLexicon');
@@ -127,6 +127,8 @@ class LangRouter
             $ctx = $this->modx->getContext($context);
             if (isset($ctx->config['cultureKey'])) {
                 $contextmap[$ctx->config['cultureKey']] = trim($context);
+            } else {
+                $this->modx->log(xpdo::LOG_LEVEL_ERROR, 'No cultureKey exists in the "' . $context . '" context!', '', 'LangRouter');
             }
             if (isset($ctx->config['cultureKeyAliases'])) {
                 $cultureKeyAliases = explode(',', $ctx->config['cultureKeyAliases']);
@@ -192,7 +194,7 @@ class LangRouter
      *
      * @return array
      */
-    private function clientLangDetect()
+    public function clientLangDetect()
     {
         $langs = array();
 
