@@ -210,9 +210,9 @@ class LangRouter
                 foreach ($langs as $lang => $val) {
                     if ($val === '') {
                         $langs[$lang] = $q;
-                        $q -= 0.01;
+                        $q = strval($q - 0.01);
                     } else {
-                        $q = $val - 0.01;
+                        $q = strval($val - 0.01);
                     }
                 }
                 arsort($langs, SORT_NUMERIC);
