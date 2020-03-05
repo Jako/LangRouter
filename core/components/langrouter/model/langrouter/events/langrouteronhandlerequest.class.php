@@ -42,8 +42,16 @@ class LangRouterOnHandleRequest extends LangRouterPlugin
                     $this->modx->cultureKey = $cultureKey;
                 } else {
                     $contextKey = $this->langrouter->contextKeyDetect($contextmap);
-
-                    $switched = $this->modx->switchContext($contextKey);
+                    if ($this->modx->getContext($contextKey)) {
+                        $switched = $this->modx->switchContext($contextKey);
+                    } else {
+                        if ($contextKey) {
+                            $this->modx->log(xPDO::LOG_LEVEL_ERROR, 'The system setting langrouter.contextDefault/babel.contextDefault is invalid!', '', 'LangRouter');
+                        } else {
+                            $this->modx->log(xPDO::LOG_LEVEL_ERROR, 'The system setting langrouter.contextDefault/babel.contextDefault is empty!', '', 'LangRouter');
+                        }
+                        $switched = false;
+                    }
                     $this->langrouter->logRequest('Culture key not found in URI');
 
                     if ($switched) {

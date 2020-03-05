@@ -30,7 +30,7 @@ class LangRouter
      * The version
      * @var string $version
      */
-    public $version = '1.3.3';
+    public $version = '1.3.4';
 
     /**
      * The class options
@@ -249,7 +249,7 @@ class LangRouter
             $this->logDump($contextKey, 'Detected context key');
         } else {
             // Use default context key
-            $contextKey = trim($this->modx->getOption('babel.contextDefault', null, 'web'));
+            $contextKey = trim( $this->modx->getOption('langrouter.contextDefault', null, $this->modx->getOption('babel.contextDefault', null, 'web'), true));
             $this->logDump($contextKey, 'Default context key');
         }
         return $contextKey;
