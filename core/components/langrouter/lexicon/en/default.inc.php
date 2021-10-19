@@ -2,7 +2,7 @@
 /**
  * Setting Lexicon Entries for LangRouter
  *
- * @package crosslinks
+ * @package langrouter
  * @subpackage lexicon
  */
 $_lang['setting_langrouter.debug'] = 'Debug';
