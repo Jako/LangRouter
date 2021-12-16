@@ -27,7 +27,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         $output .= '<h2>Install LangRouter</h2>
 
         <p>Thanks for installing LangRouter. This open source extra was
-        developped by Treehill Studio - MODX development in Münsterland.</p>
+        developed by Treehill Studio - MODX development in Münsterland.</p>
 
         <p>During the installation, we will collect some statistical data (the
         hostname, the IP address, the PHP version and the MODX version of your
@@ -51,7 +51,7 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
     case xPDOTransport::ACTION_UPGRADE:
         $output .= '<h2>Upgrade LangRouter</h2>
 
-        <p>LangRouter will be upgraded. This open source extra was developped by
+        <p>LangRouter will be upgraded. This open source extra was developed by
         Treehill Studio - MODX development in Münsterland.</p>
 
         During the upgrade, we will collect some statistical data (the hostname,
