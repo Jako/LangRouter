@@ -28,7 +28,7 @@ site_url | `{url_scheme}{http_host}{base_url}{cultureKey}/`
 
 ## System settings
 
-The following MODX system settings are available in the namespace `langrouter`:
+LangRouter uses the following system settings in the namespace `langrouter`:
 
 Key | Description | Default
 ----|-------------|--------
