@@ -9,7 +9,7 @@
  * @var array $scriptProperties
  */
 
-$className = 'LangRouter' . $modx->event->name;
+$className = 'TreehillStudio\LangRouter\Plugins\Events\\' . $modx->event->name;
 
 $corePath = $modx->getOption('langrouter.core_path', null, $modx->getOption('core_path') . 'components/langrouter/');
 /** @var LangRouter $langrouter */
@@ -17,12 +17,17 @@ $langrouter = $modx->getService('langrouter', 'LangRouter', $corePath . 'model/l
     'core_path' => $corePath
 ));
 
-$modx->loadClass('LangRouterPlugin', $langrouter->getOption('modelPath') . 'langrouter/events/', true, true);
-$modx->loadClass($className, $langrouter->getOption('modelPath') . 'langrouter/events/', true, true);
-if (class_exists($className)) {
-    /** @var LangRouterPlugin $handler */
-    $handler = new $className($modx, $scriptProperties);
-    $handler->run();
+if ($langrouter) {
+    if (class_exists($className)) {
+        $handler = new $className($modx, $scriptProperties);
+        if (get_class($handler) == $className) {
+            $handler->run();
+        } else {
+            $modx->log(xPDO::LOG_LEVEL_ERROR, $className. ' could not be initialized!', '', 'LangRouter Plugin');
+        }
+    } else {
+        $modx->log(xPDO::LOG_LEVEL_ERROR, $className. ' was not found!', '', 'LangRouter Plugin');
+    }
 }
 
 return;

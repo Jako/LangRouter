@@ -1,9 +1,9 @@
 {
   "name": "LangRouter",
   "lowCaseName": "langrouter",
-  "description": "Language Router for Babel",
+  "description": "Language Router for MODX",
   "author": "Grzegorz Adamiak, Thomas Jakobi",
-  "version": "1.3.4",
+  "version": "1.4.0",
   "package": {
     "elements": {
       "plugins": [
@@ -57,17 +57,13 @@
     "readme": "docs/readme.md",
     "license": "docs/license.md",
     "changelog": "docs/changelog.md",
-    "options": {
-      "abort_install_on_vehicle_fail": true
-    },
     "setupOptions": {
       "source": "setup.options.php"
     },
     "resolver": {
-      "before": [
-        "langrouter.set_options.php"
-      ],
       "after": [
+        "resolve.setupoptions.php",
+        "resolve.cleanup.php",
         "resolve.treehillstudio.php"
       ]
     }

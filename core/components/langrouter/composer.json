@@ -1,0 +1,17 @@
+{
+  "name": "treehillstudio/langrouter",
+  "description": "Language Router for MODX",
+  "authors": [
+    {
+      "name": "Thomas Jakobi",
+      "email": "office@treehillstudio.com",
+      "homepage": "https://treehillstudio.com"
+    }
+  ],
+  "license": "GPL-2.0",
+  "autoload": {
+    "psr-4": {
+      "TreehillStudio\\LangRouter\\": "src/"
+    }
+  }
+}

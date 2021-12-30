@@ -15,10 +15,10 @@ $output = '<style type="text/css">
     #modx-setupoptions-form h2 { margin-bottom: 15px; }
 </style>';
 
-$values = array();
+$values = [];
 switch ($options[xPDOTransport::PACKAGE_ACTION]) {
     case xPDOTransport::ACTION_INSTALL:
-        $setting = $modx->getObject('modSystemSetting', array('key' => 'babel.contextDefault'));
+        $setting = $modx->getObject('modSystemSetting', ['key' => 'babel.contextDefault']);
         if ($setting != null) {
             $values['contextDefault'] = $setting->get('value');
         }

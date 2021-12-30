@@ -4,9 +4,14 @@
  * @subpackage plugin
  */
 
-class LangRouterOnHandleRequest extends LangRouterPlugin
+namespace TreehillStudio\LangRouter\Plugins\Events;
+
+use TreehillStudio\LangRouter\Plugins\Plugin;
+use xPDO;
+
+class OnHandleRequest extends Plugin
 {
-    public function run()
+    public function process()
     {
         if ($this->modx->context->get('key') != "mgr" && MODX_API_MODE == false) {
             $this->langrouter->logRequest('Unhandled request');
@@ -66,7 +71,7 @@ class LangRouterOnHandleRequest extends LangRouterPlugin
                             if ($siteUrl != $currentUrl) {
                                 // Redirect to valid context
                                 $this->langrouter->logMessage('Redirect to ' . $siteUrl);
-                                $this->modx->sendRedirect($siteUrl, array('responseCode' => $this->langrouter->getOption('response_code')));
+                                $this->modx->sendRedirect($siteUrl, ['responseCode' => $this->langrouter->getOption('response_code')]);
                             }
                         } else {
                             $this->langrouter->logMessage('The switched MODX context was not valid');
