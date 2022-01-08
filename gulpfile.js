@@ -1,6 +1,7 @@
 const gulp = require('gulp'),
     replace = require('gulp-replace'),
     pkg = require('./_build/config.json');
+const year = new Date().getFullYear();
 
 let phpversion;
 let modxversion;
