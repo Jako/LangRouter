@@ -8,7 +8,7 @@
       "homepage": "https://treehillstudio.com"
     }
   ],
-  "license": "GPL-2.0",
+  "license": "GPL-2.0-or-later",
   "autoload": {
     "psr-4": {
       "TreehillStudio\\LangRouter\\": "src/"
