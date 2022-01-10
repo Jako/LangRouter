@@ -57,7 +57,7 @@ abstract class Plugin
      *
      * @return bool
      */
-    public function init(): bool
+    public function init()
     {
         return true;
     }
