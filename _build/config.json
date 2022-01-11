@@ -9,6 +9,7 @@
       "plugins": [
         {
           "name": "LangRouter",
+          "description": "Language Router for MODX",
           "file": "langrouter.plugin.php",
           "events": [
             "OnHandleRequest",
