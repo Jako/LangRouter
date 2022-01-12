@@ -32,7 +32,7 @@ abstract class Plugin
     public function __construct($modx, &$scriptProperties)
     {
         $this->scriptProperties = &$scriptProperties;
-        $this->modx = &$modx;
+        $this->modx =& $modx;
         $corePath = $this->modx->getOption('langrouter.core_path', null, $this->modx->getOption('core_path') . 'components/langrouter/');
         $this->langrouter = $this->modx->getService('langrouter', 'LangRouter', $corePath . 'model/langrouter/', [
             'core_path' => $corePath
