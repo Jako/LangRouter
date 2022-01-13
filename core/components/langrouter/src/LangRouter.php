@@ -159,7 +159,7 @@ class LangRouter
     public function logRequest($message = 'Request')
     {
         if ($this->getOption('debug')) {
-            $this->modx->log(modX::LOG_LEVEL_ERROR, $message . ':' .
+            $this->modx->log(xPDO::LOG_LEVEL_ERROR, $message . ':' .
                 "\nREQUEST_URI:   " . htmlspecialchars($_SERVER['REQUEST_URI']) .
                 "\nREDIRECT_URI:  " . htmlspecialchars($_SERVER['REDIRECT_URI']) .
                 "\nQUERY_STRING:  " . htmlspecialchars($_SERVER['QUERY_STRING']) .
@@ -183,7 +183,7 @@ class LangRouter
             ob_start();
             var_dump($var);
             $dump = ob_get_clean();
-            $this->modx->log(modX::LOG_LEVEL_ERROR, $name . $dump, '', 'LangRouter');
+            $this->modx->log(xPDO::LOG_LEVEL_ERROR, $name . $dump, '', 'LangRouter');
         }
     }
 
@@ -195,7 +195,7 @@ class LangRouter
     public function logMessage($message = '')
     {
         if ($this->getOption('debug')) {
-            $this->modx->log(modX::LOG_LEVEL_ERROR, $message, '', 'LangRouter');
+            $this->modx->log(xPDO::LOG_LEVEL_ERROR, $message, '', 'LangRouter');
         }
     }
 
