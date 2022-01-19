@@ -32,7 +32,7 @@ LangRouter uses the following system settings in the namespace `langrouter`:
 
 Key | Description | Default
 ----|-------------|--------
-langrouter.debug | Log debug informations in the MODX ystem log. | No
+langrouter.debug | Log debug information in the MODX ystem log. | No
 langrouter.response_code | Response code for the redirect to the right context, if the culture key is not set. | `HTTP/1.1 301 Moved Permanently`
 langrouter.contextKeys | **(optional)** Comma separated list of context keys which could be switched to. Defaults to the `babel.contextKeys` system setting. | -
 
