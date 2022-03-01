@@ -9,6 +9,14 @@
     }
   ],
   "license": "GPL-2.0-or-later",
+  "config": {
+    "platform": {
+      "php": "5.6.0"
+    }
+  },
+  "require": {
+    "php": ">=5.6"
+  },
   "autoload": {
     "psr-4": {
       "TreehillStudio\\LangRouter\\": "src/"
