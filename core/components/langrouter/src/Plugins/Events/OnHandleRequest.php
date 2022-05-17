@@ -13,7 +13,7 @@ class OnHandleRequest extends Plugin
 {
     public function process()
     {
-        if ($this->modx->context->get('key') != "mgr" && MODX_API_MODE == false) {
+        if ($this->modx->context->get('key') != "mgr" && (!defined('MODX_API_MODE') || MODX_API_MODE == false)) {
             $this->langrouter->logRequest('Unhandled request');
 
             // Get contexts and their cultureKeys
