@@ -258,45 +258,29 @@
 <p>After (or before) the installation of LangRouter you have to prepare your
 contexts.</p>
 <ol>
-<li>
-<p>Create one context for each language and name it with the language name.
+<li>Create one context for each language and name it with the language name.
    Normally the context key would be equal with the cultureKey context setting
    of that language, i.e. <code>en</code> as <strong>context key</strong> and <code>English</code> as <strong>context
-   name</strong> when the cultureKey is <code>en</code>.</p>
-</li>
-<li>
-<p>Create the context setting <strong>base_url</strong> in each context and set it to <code>/</code>.</p>
-</li>
-<li>
-<p>Create the context setting <strong>cultureKey</strong> in each context and set it to the
-   according cultureKey, i.e. <code>en</code>.</p>
-</li>
-<li>
-<p>For each context create a <strong>site_url</strong> context setting and fill it with the
+   name</strong> when the cultureKey is <code>en</code>.</li>
+<li>Create the context setting <strong>base_url</strong> in each context and set it to <code>/</code>.</li>
+<li>Create the context setting <strong>cultureKey</strong> in each context and set it to the
+   according cultureKey, i.e. <code>en</code>.</li>
+<li>For each context create a <strong>site_url</strong> context setting and fill it with the
    following value: <code>{url_scheme}{http_host}{base_url}{cultureKey}/</code>. MODX
-   handles the placeholder replacements in that setting on its own.</p>
-</li>
-<li>
-<p>Fill the MODX system setting <strong>babel.contextDefault</strong> with the context key of
+   handles the placeholder replacements in that setting on its own.</li>
+<li>Fill the MODX system setting <strong>babel.contextDefault</strong> with the context key of
    the default language, if you did not fill this during the installation of
-   LangRouter.</p>
-</li>
-<li>
-<p>In head section of the template insert the following line <code>&lt;base
-   href="[[!++site_url]]"&gt;</code>.</p>
-</li>
-<li>
-<p>Include the static files from the assets folder in your installation with
+   LangRouter.</li>
+<li>In head section of the template insert the following line <code>&lt;base
+   href="[[!++site_url]]"&gt;</code>.</li>
+<li>Include the static files from the assets folder in your installation with
    <code>[[++assets_url]]path/to/static_file</code>, i.e. <code>&lt;link
    href="[[++assets_url]]css/site.css" rel="stylesheet"&gt;</code> or <code>&lt;img
    src="[[++assets_url]]images/whatever.jpg" … &gt;</code>. You could use
    <code>[[++base_url]]path/to/static_file</code>, if your assets are not located inside the
-   assets folder.</p>
-</li>
-<li>
-<p>Set the MODX system setting <strong>link_tag_scheme</strong> to <code>-1</code> (URL is relative to
-   site_url)</p>
-</li>
+   assets folder.</li>
+<li>Set the MODX system setting <strong>link_tag_scheme</strong> to <code>-1</code> (URL is relative to
+   site_url)</li>
 </ol>
 <p>To create these settings easily, you could use the <a href="https://modx.com/extras/package/crosscontextssettings">Cross Contexts
 Settings</a> extra available
@@ -363,9 +347,10 @@ routing plugins):</p>
 <h3 id="pthumb">pThumb</h3>
 <p>Please set the system setting <code>phpthumbof.cache_url</code> to <code>/</code>. Otherwise, the
 generated thumbnail path of the snippet/output filter will contain the
-<code>{base_url}{cultureKey}</code> prefix. Then you need an additional .htaccess rule that
-removes this prefix. You have to change the list of culture keys in the
-following example:</p>
+<code>{base_url}{cultureKey}</code> prefix.</p>
+<p>Then you need an additional .htaccess rule that removes this prefix. You have to
+change the list of culture keys in the following example. It has to be inserted
+before the friendly URLs part:</p>
 <div class="highlight"><pre><span></span><code>RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^(en|de|fr|nl)/assets(.*)$ assets$2 [L,QSA]
