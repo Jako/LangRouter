@@ -3,14 +3,29 @@
 After (or before) the installation of LangRouter you have to prepare your
 contexts.
 
-1. Create one context for each language and name it with the language name. Normally the context key would be equal with the cultureKey context setting of that language, i.e. `en` as **context key** and `English` as **context name** when the cultureKey is `en`.
+1. Create one context for each language and name it with the language name.
+   Normally the context key would be equal with the cultureKey context setting
+   of that language, i.e. `en` as **context key** and `English` as **context
+   name** when the cultureKey is `en`.
 2. Create the context setting **base_url** in each context and set it to `/`.
-2. Create the context setting **cultureKey** in each context and set it to the according cultureKey, i.e. `en`.
-3. For each context create a **site_url** context setting and fill it with the following value: `{url_scheme}{http_host}{base_url}{cultureKey}/`. MODX handles the placeholder replacements in that setting on its own.
-4. Fill the MODX system setting **babel.contextDefault** with the context key of the default language, if you did not fill this during the installation of LangRouter.
-5. In head section of the template insert the following line `<base href="[[!++site_url]]">`.
-6. Include the static files from the assets folder in your installation with `[[++assets_url]]path/to/static_file`, i.e. `<link href="[[++assets_url]]css/site.css" rel="stylesheet">` or `<img src="[[++assets_url]]images/whatever.jpg" … >`. You could use `[[++base_url]]path/to/static_file`, if your assets are not located inside of the assets folder.
-7. Set the MODX system setting **link_tag_scheme** to `-1` (URL is relative to site_url)
+3. Create the context setting **cultureKey** in each context and set it to the
+   according cultureKey, i.e. `en`.
+4. For each context create a **site_url** context setting and fill it with the
+   following value: `{url_scheme}{http_host}{base_url}{cultureKey}/`. MODX
+   handles the placeholder replacements in that setting on its own.
+5. Fill the MODX system setting **babel.contextDefault** with the context key of
+   the default language, if you did not fill this during the installation of
+   LangRouter.
+6. In head section of the template insert the following line `<base
+   href="[[!++site_url]]">`.
+7. Include the static files from the assets folder in your installation with
+   `[[++assets_url]]path/to/static_file`, i.e. `<link
+   href="[[++assets_url]]css/site.css" rel="stylesheet">` or `<img
+   src="[[++assets_url]]images/whatever.jpg" … >`. You could use
+   `[[++base_url]]path/to/static_file`, if your assets are not located inside the
+   assets folder.
+8. Set the MODX system setting **link_tag_scheme** to `-1` (URL is relative to
+   site_url)
 
 To create these settings easily, you could use the [Cross Contexts
 Settings](https://modx.com/extras/package/crosscontextssettings) extra available
@@ -20,21 +35,21 @@ on MODX Extras.
 
 Example settings for an `en` context
 
-Context setting | Value
-----------------|------
-base_url | `/`
-cultureKey | `en`
-site_url | `{url_scheme}{http_host}{base_url}{cultureKey}/`
+| Context setting | Value                                            |
+|-----------------|--------------------------------------------------|
+| base_url        | `/`                                              |
+| cultureKey      | `en`                                             |
+| site_url        | `{url_scheme}{http_host}{base_url}{cultureKey}/` |
 
 ## System settings
 
 LangRouter uses the following system settings in the namespace `langrouter`:
 
-Key | Description | Default
-----|-------------|--------
-langrouter.debug | Log debug information in the MODX ystem log. | No
-langrouter.response_code | Response code for the redirect to the right context, if the culture key is not set. | `HTTP/1.1 301 Moved Permanently`
-langrouter.contextKeys | **(optional)** Comma separated list of context keys which could be switched to. Defaults to the `babel.contextKeys` system setting. | -
+| Key                      | Description                                                                                                                         | Default                          |
+|--------------------------|-------------------------------------------------------------------------------------------------------------------------------------|----------------------------------|
+| langrouter.debug         | Log debug information in the MODX ystem log.                                                                                        | No                               |
+| langrouter.response_code | Response code for the redirect to the right context, if the culture key is not set.                                                 | `HTTP/1.1 301 Moved Permanently` |
+| langrouter.contextKeys   | **(optional)** Comma separated list of context keys which could be switched to. Defaults to the `babel.contextKeys` system setting. | -                                |
 
 !!! caution 
     Please don't activate the **friendly_urls_strict** MODX system setting, if you use LangRouter. That could cause nasty redirect loops.
@@ -46,7 +61,16 @@ routing plugins):
 
 ### pThumb
 
-Please set the system setting `phpthumbof.cache_url` to `/`. Otherwise the
+Please set the system setting `phpthumbof.cache_url` to `/`. Otherwise, the
 generated thumbnail path of the snippet/output filter will contain the
-`{base_url}{cultureKey}` prefix, that needs an additional .htaccess rule that
-removes this prefix.
+`{base_url}{cultureKey}` prefix.
+
+Then you need an additional .htaccess rule that removes this prefix. You have to
+change the list of culture keys in the following example. It has to be inserted
+before the friendly URLs part:
+
+```
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(en|de|fr|nl)/assets(.*)$ assets$2 [L,QSA]
+```
