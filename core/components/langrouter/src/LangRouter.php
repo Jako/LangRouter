@@ -160,10 +160,10 @@ class LangRouter
     {
         if ($this->getOption('debug')) {
             $this->modx->log(xPDO::LOG_LEVEL_ERROR, $message . ':' .
-                "\nREQUEST_URI:   " . htmlspecialchars($_SERVER['REQUEST_URI']) .
-                "\nREDIRECT_URI:  " . htmlspecialchars($_SERVER['REDIRECT_URI']) .
-                "\nQUERY_STRING:  " . htmlspecialchars($_SERVER['QUERY_STRING']) .
-                "\nq:             " . htmlspecialchars($_REQUEST['q']) .
+                "\nREQUEST_URI:   " . htmlspecialchars($this->modx->getOption('REQUEST_URI', $_SERVER, '')) .
+                "\nREDIRECT_URI:  " . htmlspecialchars($this->modx->getOption('REDIRECT_URI', $_SERVER, '')) .
+                "\nQUERY_STRING:  " . htmlspecialchars($this->modx->getOption('QUERY_STRING', $_SERVER, '')) .
+                "\nq:             " . htmlspecialchars($this->modx->getOption('REQUEST_URI', $_REQUEST, '')) .
                 "\nContext:       " . (($this->modx->context) ? $this->modx->context->get('key') : '- none -') .
                 "\nSite start:    " . (($this->modx->context) ? $this->modx->context->getOption('site_start') : $this->modx->getOption('site_start')),
                 '', 'LangRouter');

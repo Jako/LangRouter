@@ -27,7 +27,7 @@ class OnHandleRequest extends Plugin
 
             // Determine language from request
             $queryKey = $this->modx->getOption('request_param_alias', null, 'q');
-            $query = (isset($_REQUEST[$queryKey])) ? $_REQUEST[$queryKey] : '';
+            $query = $this->modx->getOption($queryKey, $_REQUEST, '');
 
             $cultureKey = (strpos($query, '/') !== false) ? substr($query, 0, strpos($query, '/')) : $query;
 
@@ -66,7 +66,7 @@ class OnHandleRequest extends Plugin
                             $query = (empty($get)) ? $query : $query . '?' . http_build_query($get);
                             $siteUrl = $this->modx->context->getOption('site_url') . $query;
 
-                            $currentUrl = (isset($_SERVER['HTTPS']) === true ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+                            $currentUrl = ($this->modx->getOption('HTTPS', $_SERVER, false) === true ? 'https' : 'http') . '://' . $this->modx->getOption('HTTP_HOST', $_SERVER, '') . $this->modx->getOption('REQUEST_URI', $_SERVER, '');
 
                             if ($siteUrl != $currentUrl) {
                                 // Redirect to valid context
