@@ -5,8 +5,8 @@
  * @package langrouter
  * @subpackage build
  *
- * @var array $options
  * @var modX $modx
+ * @var array $options
  */
 
 $output = '<style type="text/css">
@@ -19,13 +19,10 @@ $values = [];
 switch ($options[xPDOTransport::PACKAGE_ACTION]) {
     case xPDOTransport::ACTION_INSTALL:
         $setting = $modx->getObject('modSystemSetting', ['key' => 'babel.contextDefault']);
-        if ($setting != null) {
-            $values['contextDefault'] = $setting->get('value');
-        }
+        $values['contextDefault'] = ($setting) ? $setting->get('value') : '';
         unset($setting);
 
         $output .= '<h2>Install LangRouter</h2>
-
         <p>Thanks for installing LangRouter. This open source extra was
         developed by Treehill Studio - MODX development in Münsterland.</p>
 
@@ -41,14 +38,18 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         <hr>
         
         <p>Please enter the Babel Default Context, which should be served when
-        no language is specified in request, eg. \'en\'.<br><br></p>
-        
-        <label for="babel-contextDefault">Babel Default Context:</label>
-        <input type="text" name="contextDefault" id="babel-contextDefault" 
-        width="300" value="'.$values['contextDefault'].'">';
+        no language is specified in request, eg. \'en\'.<br><br></p>';
 
+        $output .= '<div style="position: relative">
+                        <label for="contextDefault">Babel Default Context:</label>
+                        <input type="text" name="contextDefault" id="contextDefault" width="450" value="' . $values['contextDefault'] . '" style="font-size: 13px; padding: 5px; width: calc(100% - 10px); height: 32px; margin-bottom: 10px" />
+                    </div>';
         break;
     case xPDOTransport::ACTION_UPGRADE:
+        $setting = $modx->getObject('modSystemSetting', ['key' => 'babel.contextDefault']);
+        $values['contextDefault'] = ($setting) ? $setting->get('value') : '';
+        unset($setting);
+
         $output .= '<h2>Upgrade LangRouter</h2>
 
         <p>LangRouter will be upgraded. This open source extra was developed by
@@ -63,6 +64,10 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         <p>If you upgrade this package, you are giving us your permission to
         collect, process and use that data for statistical purposes.</p>';
 
+        $output .= '<div style="position: relative">
+                        <label for="contextDefault">Babel Default Context:</label>
+                        <input type="text" name="contextDefault" id="contextDefault" width="450" value="' . $values['contextDefault'] . '" style="font-size: 13px; padding: 5px; width: calc(100% - 10px); height: 32px; margin-bottom: 10px" />
+                    </div>';
         break;
     case xPDOTransport::ACTION_UNINSTALL:
         break;
