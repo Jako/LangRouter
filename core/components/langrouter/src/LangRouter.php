@@ -3,7 +3,7 @@
  * LangRouter
  *
  * Copyright 2012-2014 by Grzegorz Adamiak <https://github.com/gadamiak>
- * Copyright 2015-2022 by Thomas Jakobi <office@treehillstudio.com>
+ * Copyright 2015-2023 by Thomas Jakobi <office@treehillstudio.com>
  *
  * @package langrouter
  * @subpackage classfile
@@ -41,7 +41,7 @@ class LangRouter
      * The version
      * @var string $version
      */
-    public $version = '1.4.1';
+    public $version = '1.4.2';
 
     /**
      * The class options

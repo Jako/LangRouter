@@ -2,7 +2,7 @@
 
 Search for LangRouter in the Package Manager of a MODX installation and install
 it in there. You have to fill the context key of the default language during the
-setup. See in [Usage](/usage/) for the possible value.
+setup. See in [Usage](usage.md) for the possible value.
 
 ## Manual installation
 
