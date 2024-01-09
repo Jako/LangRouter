@@ -3,7 +3,7 @@
   "lowCaseName": "langrouter",
   "description": "Language Router for MODX",
   "author": "Grzegorz Adamiak, Thomas Jakobi",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "package": {
     "elements": {
       "plugins": [

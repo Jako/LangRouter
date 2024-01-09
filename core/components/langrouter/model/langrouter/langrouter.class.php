@@ -3,7 +3,7 @@
  * LangRouter
  *
  * Copyright 2012-2014 by Grzegorz Adamiak <https://github.com/gadamiak>
- * Copyright 2015-2023 by Thomas Jakobi <office@treehillstudio.com>
+ * Copyright 2015-2024 by Thomas Jakobi <office@treehillstudio.com>
  *
  * @package langrouter
  * @subpackage classfile

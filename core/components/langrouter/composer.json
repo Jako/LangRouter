@@ -3,6 +3,10 @@
   "description": "Language Router for MODX",
   "authors": [
     {
+      "name": "Grzegorz Adamiak",
+      "homepage": "https://github.com/gadamiak"
+    },
+    {
       "name": "Thomas Jakobi",
       "email": "office@treehillstudio.com",
       "homepage": "https://treehillstudio.com"
