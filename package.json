@@ -4,7 +4,7 @@
   "author": "Grzegorz Adamiak, Thomas Jakobi <office@treehillstudio.com>",
   "private": true,
   "devDependencies": {
-    "gulp": "^4.0.2",
-    "gulp-replace": "^1.1.3"
+    "gulp": "^5.0.0",
+    "gulp-replace": "^1.1.4"
   }
 }
