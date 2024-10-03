@@ -51,10 +51,12 @@ LangRouter uses the following system settings in the namespace `langrouter`:
 | langrouter.response_code | Response code for the redirect to the right context, if the culture key is not set.                                                 | `HTTP/1.1 301 Moved Permanently` |
 | langrouter.contextKeys   | **(optional)** Comma separated list of context keys which could be switched to. Defaults to the `babel.contextKeys` system setting. | -                                |
 
-!!! caution 
-    Please don't activate the **friendly_urls_strict** MODX system setting, if you use LangRouter. That could cause nasty redirect loops.
-    
-## Usage with other extras 
+!!! caution "Redirect loops possible"
+
+    Please don't activate the **friendly_urls_strict** MODX system setting, if
+    you use LangRouter. That could cause nasty redirect loops.
+
+## Usage with other extras
 
 Some extras settings have to be changed to work well with LangRouter (and other
 routing plugins):
