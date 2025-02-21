@@ -10,21 +10,24 @@ contexts.
 2. Create the context setting **base_url** in each context and set it to `/`.
 3. Create the context setting **cultureKey** in each context and set it to the
    according cultureKey, i.e. `en`.
-4. For each context create a **site_url** context setting and fill it with the
+4. Optionally create the context setting **cultureKeyAliases** in each context
+   and set it to a comma-separated list of other culture keys to which this
+   context should respond, i.e. `de,nl`.
+5. For each context create a **site_url** context setting and fill it with the
    following value: `{url_scheme}{http_host}{base_url}{cultureKey}/`. MODX
    handles the placeholder replacements in that setting on its own.
-5. Fill the MODX system setting **babel.contextDefault** with the context key of
+6. Fill the MODX system setting **babel.contextDefault** with the context key of
    the default language, if you did not fill this during the installation of
    LangRouter.
-6. In head section of the template insert the following line `<base
+7. In head section of the template insert the following line `<base
    href="[[!++site_url]]">`.
-7. Include the static files from the assets folder in your installation with
+8. Include the static files from the assets folder in your installation with
    `[[++assets_url]]path/to/static_file`, i.e. `<link
    href="[[++assets_url]]css/site.css" rel="stylesheet">` or `<img
    src="[[++assets_url]]images/whatever.jpg" … >`. You could use
    `[[++base_url]]path/to/static_file`, if your assets are not located inside the
    assets folder.
-8. Set the MODX system setting **link_tag_scheme** to `-1` (URL is relative to
+9. Set the MODX system setting **link_tag_scheme** to `-1` (URL is relative to
    site_url)
 
 To create these settings easily, you could use the [Cross Contexts
@@ -35,11 +38,12 @@ on MODX Extras.
 
 Example settings for an `en` context
 
-| Context setting | Value                                            |
-|-----------------|--------------------------------------------------|
-| base_url        | `/`                                              |
-| cultureKey      | `en`                                             |
-| site_url        | `{url_scheme}{http_host}{base_url}{cultureKey}/` |
+| Context setting   | Value                                            |
+|-------------------|--------------------------------------------------|
+| base_url          | `/`                                              |
+| cultureKey        | `en`                                             |
+| cultureKeyAliases | `de,nl`                                          |
+| site_url          | `{url_scheme}{http_host}{base_url}{cultureKey}/` |
 
 ## System settings
 
@@ -67,9 +71,9 @@ Please set the system setting `phpthumbof.cache_url` to `/`. Otherwise, the
 generated thumbnail path of the snippet/output filter will contain the
 `{base_url}{cultureKey}` prefix.
 
-Then you need an additional .htaccess rule that removes this prefix. You have to
-change the list of culture keys in the following example. It has to be inserted
-before the friendly URLs part:
+On the other hand, you can add an additional .htaccess rule that removes this
+prefix. In the following example, you need to change the list of culture keys.
+It must be inserted before the friendly URLs part:
 
 ```
 RewriteCond %{REQUEST_FILENAME} !-d
