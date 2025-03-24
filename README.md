@@ -1,3 +1,5 @@
+[![Default Lexicon](https://hosted.weblate.org/widget/modx-extras/langrouter/svg-badge.svg)](https://hosted.weblate.org/projects/modx-extras/langrouter/)
+
 # LangRouter
 
 Language context router for use with Babel.
@@ -30,4 +32,4 @@ The project is licensed under the [GPLv2 license](https://github.com/Jako/LangRo
 
 ## Translations
 
-Translations of the package can be made for the [Default Lexicon](https://hosted.weblate.org/projects/modx-extras/langrouter/standard/)
+Translations of the package can be made for the [Default Lexicon](https://hosted.weblate.org/projects/modx-extras/langrouter/standard/) and the [Setting Lexicon](https://hosted.weblate.org/projects/modx-extras/langrouter/system-settings/)
