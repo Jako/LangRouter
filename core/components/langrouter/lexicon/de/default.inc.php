@@ -5,5 +5,5 @@
  * @package langrouter
  * @subpackage lexicon
  */
-$_lang['langrouter.refresh_cache'] = 'Leere den [[+packagename]]-Cache';
+$_lang['langrouter.refresh_cache'] = 'Leeren des [[+packagename]]-Caches';
 
