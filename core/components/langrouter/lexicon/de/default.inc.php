@@ -6,4 +6,3 @@
  * @subpackage lexicon
  */
 $_lang['langrouter.refresh_cache'] = 'Leeren des [[+packagename]]-Caches';
-
