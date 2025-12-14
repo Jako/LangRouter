@@ -24,13 +24,13 @@ contexts.
 8. Include the static files from the assets folder in your installation with
    `[[++assets_url]]path/to/static_file`, i.e. `<link
    href="[[++assets_url]]css/site.css" rel="stylesheet">` or `<img
-   src="[[++assets_url]]images/whatever.jpg" … >`. You could use
+   src="[[++assets_url]]images/whatever.jpg" … >`. You can use
    `[[++base_url]]path/to/static_file`, if your assets are not located inside the
    assets folder.
 9. Set the MODX system setting **link_tag_scheme** to `-1` (URL is relative to
    site_url)
 
-To create these settings easily, you could use the [Cross Contexts
+To create these settings easily, you can use the [Cross Contexts
 Settings](https://modx.com/extras/package/crosscontextssettings) extra available
 on MODX Extras.
 
@@ -49,16 +49,17 @@ Example settings for an `en` context
 
 LangRouter uses the following system settings in the namespace `langrouter`:
 
-| Key                      | Description                                                                                                                         | Default                          |
-|--------------------------|-------------------------------------------------------------------------------------------------------------------------------------|----------------------------------|
-| langrouter.debug         | Log debug information in the MODX ystem log.                                                                                        | No                               |
-| langrouter.response_code | Response code for the redirect to the right context, if the culture key is not set.                                                 | `HTTP/1.1 301 Moved Permanently` |
-| langrouter.contextKeys   | **(optional)** Comma separated list of context keys which could be switched to. Defaults to the `babel.contextKeys` system setting. | -                                |
+| Key                       | Name            | Description                                                                               | Default                        |
+|---------------------------|-----------------|-------------------------------------------------------------------------------------------|--------------------------------|
+| langrouter.contextDefault | Default Context | Default Context for LangRouter (supercedes babel.contextDefault system setting).          | -                              |
+| langrouter.contextKeys    | Context Keys    | Comma-separated list of context keys which should be used to link multilingual resources. | -                              |
+| langrouter.debug          | Debug           | Log debug information in MODX error log.                                                  | No                             |
+| langrouter.response_code  | Response Code   | Response code for the redirect to the right context, if the culture key is not set.       | HTTP/1.1 301 Moved Permanently |
 
 !!! caution "Redirect loops possible"
 
     Please don't activate the **friendly_urls_strict** MODX system setting, if
-    you use LangRouter. That could cause nasty redirect loops.
+    you use LangRouter. That can cause nasty redirect loops.
 
 ## Usage with other extras
 
