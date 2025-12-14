@@ -540,13 +540,13 @@ contexts.</p>
 <li>Include the static files from the assets folder in your installation with
    <code>[[++assets_url]]path/to/static_file</code>, i.e. <code>&lt;link
    href="[[++assets_url]]css/site.css" rel="stylesheet"&gt;</code> or <code>&lt;img
-   src="[[++assets_url]]images/whatever.jpg" … &gt;</code>. You could use
+   src="[[++assets_url]]images/whatever.jpg" … &gt;</code>. You can use
    <code>[[++base_url]]path/to/static_file</code>, if your assets are not located inside the
    assets folder.</li>
 <li>Set the MODX system setting <strong>link_tag_scheme</strong> to <code>-1</code> (URL is relative to
    site_url)</li>
 </ol>
-<p>To create these settings easily, you could use the <a href="https://modx.com/extras/package/crosscontextssettings">Cross Contexts
+<p>To create these settings easily, you can use the <a href="https://modx.com/extras/package/crosscontextssettings">Cross Contexts
 Settings</a> extra available
 on MODX Extras.</p>
 <h3 id="example">Example</h3>
@@ -583,32 +583,42 @@ on MODX Extras.</p>
 <thead>
 <tr>
 <th>Key</th>
+<th>Name</th>
 <th>Description</th>
 <th>Default</th>
 </tr>
 </thead>
 <tbody>
 <tr>
+<td>langrouter.contextDefault</td>
+<td>Default Context</td>
+<td>Default Context for LangRouter (supercedes babel.contextDefault system setting).</td>
+<td>-</td>
+</tr>
+<tr>
+<td>langrouter.contextKeys</td>
+<td>Context Keys</td>
+<td>Comma-separated list of context keys which should be used to link multilingual resources.</td>
+<td>-</td>
+</tr>
+<tr>
 <td>langrouter.debug</td>
-<td>Log debug information in the MODX ystem log.</td>
+<td>Debug</td>
+<td>Log debug information in MODX error log.</td>
 <td>No</td>
 </tr>
 <tr>
 <td>langrouter.response_code</td>
+<td>Response Code</td>
 <td>Response code for the redirect to the right context, if the culture key is not set.</td>
-<td><code>HTTP/1.1 301 Moved Permanently</code></td>
-</tr>
-<tr>
-<td>langrouter.contextKeys</td>
-<td><strong>(optional)</strong> Comma separated list of context keys which could be switched to. Defaults to the <code>babel.contextKeys</code> system setting.</td>
-<td>-</td>
+<td>HTTP/1.1 301 Moved Permanently</td>
 </tr>
 </tbody>
 </table>
 <div class="admonition caution">
 <p class="admonition-title">Redirect loops possible</p>
 <p>Please don't activate the <strong>friendly_urls_strict</strong> MODX system setting, if
-you use LangRouter. That could cause nasty redirect loops.</p>
+you use LangRouter. That can cause nasty redirect loops.</p>
 </div>
 <h2 id="usage-with-other-extras">Usage with other extras</h2>
 <p>Some extras settings have to be changed to work well with LangRouter (and other
