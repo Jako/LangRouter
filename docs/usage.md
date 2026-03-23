@@ -56,7 +56,7 @@ LangRouter uses the following system settings in the namespace `langrouter`:
 | langrouter.debug          | Debug           | Log debug information in MODX error log.                                                  | No                             |
 | langrouter.response_code  | Response Code   | Response code for the redirect to the right context, if the culture key is not set.       | HTTP/1.1 301 Moved Permanently |
 
-!!! caution "Redirect loops possible"
+!!! danger "Redirect loops possible"
 
     Please don't activate the **friendly_urls_strict** MODX system setting, if
     you use LangRouter. That can cause nasty redirect loops.
