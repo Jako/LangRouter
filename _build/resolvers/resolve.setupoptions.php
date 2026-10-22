@@ -6,15 +6,18 @@
  * @subpackage build
  *
  * @var array $options
- * @var xPDOObject $object
- * @var modX $modx
+ * @var xPDOTransport $transport
  */
+
+/** @var modX $modx */
+$modx = $transport->xpdo;
+
+$success = true;
 
 switch ($options[xPDOTransport::PACKAGE_ACTION]) {
     case xPDOTransport::ACTION_INSTALL:
     case xPDOTransport::ACTION_UPGRADE:
-        $modx = &$object->xpdo;
-
+        /** @var modSystemSetting $setting */
         $setting = $modx->getObject('modSystemSetting', 'babel.contextDefault');
         if (!$setting) {
             $setting = $modx->newObject('modSystemSetting');
@@ -36,7 +39,11 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
             $setting->set('value', $contextDefault);
         }
         $setting->save();
+
+        $success = true;
+        break;
+    case xPDOTransport::ACTION_UNINSTALL:
+        $success = true;
         break;
 }
-
-return true;
+return $success;
