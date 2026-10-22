@@ -1,10 +1,19 @@
 {
+  "fullname": "LangRouter",
   "name": "langrouter",
   "description": "Language Router for Babel",
   "author": "Grzegorz Adamiak, Thomas Jakobi <office@treehillstudio.com>",
   "private": true,
-  "devDependencies": {
-    "gulp": "^5.0.1",
-    "gulp-replace": "^1.1.4"
-  }
+  "version": "1.4.3",
+  "phpversion": "5.6",
+  "modxversion": "2.6",
+  "startYear": "2015",
+  "scripts": {
+    "build": "node build.js",
+    "build:bump": "node build.js bump"
+  },
+  "browserslist": [
+    "> 1%",
+    "defaults"
+  ]
 }

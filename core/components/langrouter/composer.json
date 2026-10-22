@@ -1,6 +1,7 @@
 {
   "name": "treehillstudio/langrouter",
   "description": "Language Router for MODX",
+  "version": "1.4.3",
   "authors": [
     {
       "name": "Grzegorz Adamiak",
