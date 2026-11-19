@@ -13,8 +13,10 @@ const dateStr = new Date().toISOString()
 
 const copyrightRegex = new RegExp(`Copyright ${startYear}(-\\d{4})? by`, 'g');
 const copyrightReplace = `Copyright ${yearRange} by`;
-const apiRegex = new RegExp(`&copy; ${startYear}(-\\d{4})?`, 'g');
-const apiReplace = `&copy; ${yearRange}`;
+// Own copyright range: after '&copy; ' or ', ', followed by a link (or 'by' and a link) and no later year on that line.
+// This skips the ranges of previous authors, e.g. '&copy; 2015 <a>Previous Author</a>, 2015-2025 <a>Treehill Studio</a>'.
+const apiRegex = new RegExp(`(?<=&copy; |, )${startYear}(-\\d{4})?(?= (by )?<a )(?![^\\n]*\\b(19|20)\\d{2}\\b)`, 'g');
+const apiReplace = yearRange;
 
 let versionParts = version.split('-');
 let versionNumber = versionParts[0];
